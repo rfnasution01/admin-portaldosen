@@ -15,6 +15,7 @@ export type GetSiakadJadwalKuliahType = {
   jam_selesai: string
   status: string
   fakultas: string
+  prodi: string
   tahun: string
   tahap: string
 }

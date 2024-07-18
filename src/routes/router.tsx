@@ -1,7 +1,10 @@
 import { createBrowserRouter, redirect } from 'react-router-dom'
 import {
   ComingSoonPage,
-  DashboardPage,
+  CommonLayout,
+  JadwalKuliahDetailPage,
+  JadwalKuliahMahasiswaPage,
+  JadwalKuliahPage,
   LoginLayout,
   MainLayout,
 } from './loadables'
@@ -23,7 +26,31 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <DashboardPage />,
+        element: <CommonLayout />,
+        children: [
+          {
+            path: '',
+            element: <JadwalKuliahPage />,
+          },
+        ],
+      },
+      {
+        path: 'jadwal-kuliah',
+        element: <CommonLayout />,
+        children: [
+          {
+            path: '',
+            element: <ComingSoonPage />,
+          },
+          {
+            path: 'detail',
+            element: <JadwalKuliahDetailPage />,
+          },
+          {
+            path: 'mahasiswa',
+            element: <JadwalKuliahMahasiswaPage />,
+          },
+        ],
       },
       {
         path: 'umum',

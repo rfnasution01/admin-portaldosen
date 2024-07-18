@@ -11,6 +11,15 @@ export const columnsListJadwalKuliah: Column<GetSiakadJadwalKuliahType>[] = [
   { header: 'SKS', key: 'sks_mk', width: '!min-w-[12rem]' },
   { header: 'Kelas', key: 'nama_kelas', width: '!min-w-[12rem]' },
   { header: 'Ruang', key: 'nama_kelas', width: '!min-w-[12rem]' },
-  { header: 'Hari/Jam', key: 'hari', width: '!min-w-[12rem]' },
+  {
+    header: 'Hari/Jam',
+    key: 'hari',
+    width: '!min-w-[12rem]',
+    renderCell: (rowData) => {
+      return (
+        <div>{`${rowData?.hari ?? '-'} / ${rowData?.jam_mulai ?? '-'} - ${rowData?.jam_selesai ?? '-'}`}</div>
+      )
+    },
+  },
   { header: 'Status', key: 'status', width: '!min-w-[12rem]' },
 ]

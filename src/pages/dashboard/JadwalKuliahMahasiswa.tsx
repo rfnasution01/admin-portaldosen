@@ -1,16 +1,16 @@
 import SkeletonText from '@/components/SkeletonComonent/SkeletonText'
 import { Table } from '@/components/TableComponent'
 import { columnsListJadwalKuliah } from '@/components/TableComponent/column'
-import { useSiakadDashboard } from '@/data/siakad/useDashboard'
+import { useSiakadDashboard } from '@/data/siakad/dashboard/useDashboard'
 import { useSiakadProfil } from '@/data/siakad/useProfil'
 
-export default function Dashboard() {
+export default function JadwalKuliahMahasiswa() {
   const { profil } = useSiakadProfil()
   const { kataBijak, loadingKataBijak, jadwalKuliah, loadingJadwalKuliah } =
     useSiakadDashboard()
 
   return (
-    <div className="scrollbar flex h-full flex-col gap-32 overflow-y-auto p-32">
+    <div className="scrollbar flex h-full w-full flex-col gap-32 overflow-y-auto p-32">
       <p className="text-black-300 font-sans text-[2.8rem] font-bold">
         Selamat Datang, Pak {profil?.identitas?.nama}
       </p>

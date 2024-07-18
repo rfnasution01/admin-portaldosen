@@ -10,7 +10,7 @@ const SkeletonText: React.FC<SkeletonTextProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div className={`space-y-8 ${className}`}>
       {Array.from({ length: lines }).map((_, index) => (
         <div
           key={index}

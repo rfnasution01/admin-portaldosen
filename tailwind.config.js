@@ -109,6 +109,7 @@ export default {
         primary: {
           active: '#3085C3',
           inactive: '#B0C4DE',
+          50: '#E4EEF7',
           100: '#00529C',
           200: '#004C6D',
           900: '#003971',
