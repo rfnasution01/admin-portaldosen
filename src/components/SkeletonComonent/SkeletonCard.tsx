@@ -12,7 +12,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
 
 const SkeletonCard: React.FC = () => {
   return (
-    <div className="mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg">
+    <div className="mx-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg">
       <div className="p-16">
         <Skeleton size="h-128 w-full" />
         <div className="mt-16 space-y-2">
