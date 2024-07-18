@@ -103,6 +103,8 @@ export default {
         },
         neutral: {
           white: '#FAFAFA',
+          secondary: '#F0F7FF',
+          black: '#1C1C1C',
         },
         primary: {
           active: '#3085C3',
@@ -129,6 +131,7 @@ export default {
           DEFAULT: '#000000',
           100: '#5C5C5C',
           200: '#1E1E1E',
+          300: '#003971',
         },
         general: {
           DEFAULT: '#1349A0',
@@ -154,6 +157,9 @@ export default {
           background: '#2a2a2a',
           primary: '#60a5fa',
           tint: { 1: '#334155', 2: '#181818' },
+        },
+        info: {
+          DEFAULT: '#2C2CCB',
         },
       },
 

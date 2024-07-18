@@ -11,3 +11,4 @@ export const MainLayout = loadable(() => import('@/layouts/mainLayout'))
 // ----- Pages -----
 // ------------------
 export const ComingSoonPage = loadable(() => import('@/pages/ComingSoon'))
+export const DashboardPage = loadable(() => import('@/pages/Dashboard'))
