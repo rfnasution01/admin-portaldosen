@@ -101,6 +101,9 @@ export default {
           DEFAULT: '#F5F5DC',
           secondary: '#F5F5DC',
         },
+        neutral: {
+          white: '#FAFAFA',
+        },
         primary: {
           active: '#3085C3',
           inactive: '#B0C4DE',
@@ -111,6 +114,12 @@ export default {
         secondary: {
           DEFAULT: '#e74c3c',
           shade: { 100: '#6b7280' },
+        },
+        danger: {
+          DEFAULT: '#E23333',
+        },
+        success: {
+          DEFAULT: '#4CCB4C',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
