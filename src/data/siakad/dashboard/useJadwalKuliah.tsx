@@ -2,8 +2,14 @@ import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { Bounce, toast } from 'react-toastify'
-import { GetSiakadJadwalKuliahType } from '@/store/type/siakad/jadwalKuliah'
-import { useGetSiakadJadwalKuliahDetailQuery } from '@/store/slices/siakad/jadwalKuliah'
+import {
+  GetSiakadJadwalKuliahMahasiswaType,
+  GetSiakadJadwalKuliahType,
+} from '@/store/type/siakad/jadwalKuliah'
+import {
+  useGetSiakadJadwalKuliahDetailQuery,
+  useGetSiakadJadwalKuliahMahasiswaQuery,
+} from '@/store/slices/siakad/jadwalKuliah'
 
 export function useSiakadJadwalKuliah() {
   const navigate = useNavigate()
@@ -32,7 +38,7 @@ export function useSiakadJadwalKuliah() {
     if (dataJadwalKuliah) {
       setJadwalKuliahDetail(dataJadwalKuliah?.data)
     }
-  }, [dataJadwalKuliah])
+  }, [dataJadwalKuliah, id])
 
   useEffect(() => {
     if (isErrorJadwalKuliah) {
@@ -59,8 +65,35 @@ export function useSiakadJadwalKuliah() {
     }
   }, [isErrorJadwalKuliah, errorJadwalKuliah])
 
+  // --- Jadwal Kuliah Mahasiswa ---
+  const [jadwalKuliahMahasiswa, setJadwalKuliahMahasiswa] = useState<
+    GetSiakadJadwalKuliahMahasiswaType[]
+  >([])
+
+  const {
+    data: dataJadwalKuliahMahasiswa,
+    isLoading: isLoadingJadwalKuliahMahasiswa,
+    isFetching: isFetchingJadwalKuliahMahasiswa,
+  } = useGetSiakadJadwalKuliahMahasiswaQuery(
+    {
+      id_jadwal: id,
+    },
+    { skip: !id || id === '' },
+  )
+
+  const loadingJadwalKuliahMahasiswa =
+    isFetchingJadwalKuliahMahasiswa || isLoadingJadwalKuliahMahasiswa
+
+  useEffect(() => {
+    if (dataJadwalKuliahMahasiswa) {
+      setJadwalKuliahMahasiswa(dataJadwalKuliahMahasiswa?.data)
+    }
+  }, [dataJadwalKuliahMahasiswa, id])
+
   return {
     loadingJadwalKuliah,
     jadwalKuliahDetail,
+    loadingJadwalKuliahMahasiswa,
+    jadwalKuliahMahasiswa,
   }
 }

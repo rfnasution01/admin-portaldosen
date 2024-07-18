@@ -3,7 +3,6 @@ import {
   ComingSoonPage,
   CommonLayout,
   JadwalKuliahDetailPage,
-  JadwalKuliahMahasiswaPage,
   JadwalKuliahPage,
   LoginLayout,
   MainLayout,
@@ -48,7 +47,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'mahasiswa',
-            element: <JadwalKuliahMahasiswaPage />,
+            element: <ComingSoonPage />,
           },
         ],
       },

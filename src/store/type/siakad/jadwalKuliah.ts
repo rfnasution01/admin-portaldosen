@@ -21,6 +21,7 @@ export type GetSiakadJadwalKuliahType = {
 }
 
 export type GetSiakadJadwalKuliahMahasiswaType = {
+  id: string
   idm: string
   nim: string
   nama: string

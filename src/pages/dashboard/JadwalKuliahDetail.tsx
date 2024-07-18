@@ -1,5 +1,7 @@
 import { LabelJadwalKuliah } from '@/components/LabelComponent'
 import SkeletonText from '@/components/SkeletonComonent/SkeletonText'
+import { Table } from '@/components/TableComponent'
+import { columnsListJadwalKuliahMahasiswa } from '@/components/TableComponent/column'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -8,7 +10,12 @@ import { useNavigate } from 'react-router-dom'
 export default function JadwalKuliahDetail() {
   const navigate = useNavigate()
 
-  const { jadwalKuliahDetail, loadingJadwalKuliah } = useSiakadJadwalKuliah()
+  const {
+    jadwalKuliahDetail,
+    loadingJadwalKuliah,
+    loadingJadwalKuliahMahasiswa,
+    jadwalKuliahMahasiswa,
+  } = useSiakadJadwalKuliah()
 
   return (
     <div className="scrollbar flex h-full w-full flex-col gap-32 overflow-y-auto p-32 font-sans">
@@ -57,6 +64,17 @@ export default function JadwalKuliahDetail() {
           </>
         )}
       </div>
+      <p className="text-black-300 font-sans text-[2.8rem] font-bold">
+        Daftar Mahasiswa Peserta
+      </p>
+      <Table
+        data={jadwalKuliahMahasiswa}
+        columns={columnsListJadwalKuliahMahasiswa}
+        loading={loadingJadwalKuliahMahasiswa}
+        isNumber
+        currentPage={1}
+        pageSize={1000}
+      />
     </div>
   )
 }

@@ -17,7 +17,7 @@ export type Column<T> = {
 }
 
 export interface ItemTable {
-  id: string
+  id?: string
 }
 
 type Props<T extends ItemTable, P> = {

@@ -1,5 +1,9 @@
-import { GetSiakadJadwalKuliahType } from '@/store/type/siakad/jadwalKuliah'
+import {
+  GetSiakadJadwalKuliahMahasiswaType,
+  GetSiakadJadwalKuliahType,
+} from '@/store/type/siakad/jadwalKuliah'
 import { Column } from '..'
+import { getInitials } from '@/utils/formatText'
 
 export const columnsListJadwalKuliah: Column<GetSiakadJadwalKuliahType>[] = [
   {
@@ -23,3 +27,44 @@ export const columnsListJadwalKuliah: Column<GetSiakadJadwalKuliahType>[] = [
   },
   { header: 'Status', key: 'status', width: '!min-w-[12rem]' },
 ]
+
+export const columnsListJadwalKuliahMahasiswa: Column<GetSiakadJadwalKuliahMahasiswaType>[] =
+  [
+    {
+      header: 'Foto',
+      key: 'hari',
+      width: '!min-w-[12rem]',
+      renderCell: (rowData) => {
+        return (
+          <div>
+            {rowData?.foto || rowData?.foto !== '' ? (
+              <img
+                src={rowData?.foto}
+                alt={rowData?.nama}
+                className="h-[4rem] w-[4rem] rounded-xl"
+                loading="lazy"
+              />
+            ) : (
+              <div className="text-black-300 flex h-[4rem] w-[4rem] items-center justify-center rounded-xl bg-[#D9D9D9]">
+                <p>{getInitials(rowData?.nama)}</p>
+              </div>
+            )}
+          </div>
+        )
+      },
+    },
+    { header: 'NIM', key: 'nim', width: '!min-w-[12rem]' },
+    { header: 'Mahasiswa', key: 'nama', width: '!min-w-[12rem]' },
+    {
+      header: 'Jenis Kelamin',
+      key: 'jenis_kelamin',
+      width: '!min-w-[12rem]',
+      renderCell(rowData) {
+        return (
+          <p>
+            {rowData?.jenis_kelamin?.includes('P') ? 'Perempuan' : 'Laki-laki'}
+          </p>
+        )
+      },
+    },
+  ]
