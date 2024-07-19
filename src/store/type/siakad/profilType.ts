@@ -11,6 +11,8 @@ export type SiakadProfilType = {
   nidn: string
   email: string
   gambar: string
+  gelar_depan: string
+  gelar_belakang: string
 }
 
 export type SiakadAkademikType = {
@@ -20,4 +22,13 @@ export type SiakadAkademikType = {
   nama_tahun: string
   kode_prodi: string
   nama_prodi: string
+}
+
+export type PostProfilBody = {
+  nama: string
+  gelar_depan: string
+  gelar_belakang: string
+  hp: string
+  nidn: string
+  email: string
 }

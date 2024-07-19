@@ -4,9 +4,9 @@ import { getInitials } from '@/utils/formatText'
 import { MainMenu } from './mainMenu'
 import { Dispatch, SetStateAction } from 'react'
 import clsx from 'clsx'
-import { UpdatePhotoProfil } from '@/components/DialogComponent/UpdatePhotoProfil'
-import { Form } from '@/components/Form'
-import { FormInputFile } from '@/components/InputComponent'
+import { FormUpdatePhoto } from '@/components/FormComponent/siakad'
+import FormUpdateProfil from '@/components/FormComponent/siakad/FormUpdateProfil'
+import { ValidasiUpdateForm } from '@/components/DialogComponent/ValidasiUpdateForm'
 
 interface EditButtonProps {
   onClick: () => void
@@ -22,13 +22,18 @@ export function MainAside({
   const {
     loadingProfil,
     profil,
-    form,
+    formPhoto,
     loadingFile,
     handleUploadFoto,
     urls,
     setUrls,
-    setIsShow,
-    isShow,
+    setIsShowPhoto,
+    isShowPhoto,
+    isShowProfil,
+    setIsShowProfil,
+    isLoadingEditProfil,
+    handleSubmit,
+    formUpdateProfil,
   } = useSiakadProfil()
 
   return (
@@ -55,7 +60,7 @@ export function MainAside({
                   />
                   <EditButton
                     onClick={() => {
-                      setIsShow(true)
+                      setIsShowPhoto(true)
                     }}
                   />
                 </>
@@ -66,40 +71,62 @@ export function MainAside({
                   </p>
                   <EditButton
                     onClick={() => {
-                      setIsShow(true)
+                      setIsShowPhoto(true)
                     }}
                   />
                 </div>
               )}
             </div>
 
-            <p className="font-sans text-[2.6rem]">
-              @{profil?.identitas?.username}
-            </p>
+            <div className="flex items-center gap-12">
+              <p className="font-sans text-[2.6rem]">
+                @{profil?.identitas?.username}
+              </p>
+              <button
+                onClick={() => setIsShowProfil(true)}
+                className="rounded-2xl px-4 py-8 hover:bg-opacity-80"
+                aria-label="Edit"
+              >
+                ✏️
+              </button>
+            </div>
             <p>{profil?.identitas?.nidn}</p>
           </>
         )}
       </div>
       {/* --- Menu --- */}
       <MainMenu setIsOpen={setIsOpen} />
-      <UpdatePhotoProfil
-        isOpen={isShow}
-        setIsOpen={setIsShow}
+
+      <ValidasiUpdateForm
+        isOpen={isShowProfil}
+        setIsOpen={setIsShowProfil}
+        title="Form Ganti Photo"
+        isShow
         child={
           <div className="flex gap-32">
-            <Form {...form}>
-              <form className="flex flex-col gap-32">
-                <FormInputFile
-                  urls={urls}
-                  setUrls={setUrls}
-                  form={form}
-                  loadingFile={loadingFile}
-                  name="photo"
-                  handleUploadFoto={handleUploadFoto}
-                  label="Photo"
-                />
-              </form>
-            </Form>
+            <FormUpdateProfil
+              form={formUpdateProfil}
+              handleSubmit={handleSubmit}
+              isLoading={isLoadingEditProfil}
+              setIsShow={setIsShowProfil}
+            />
+          </div>
+        }
+      />
+
+      <ValidasiUpdateForm
+        isOpen={isShowPhoto}
+        setIsOpen={setIsShowPhoto}
+        title="Form Update Profil"
+        child={
+          <div className="flex gap-32">
+            <FormUpdatePhoto
+              urls={urls}
+              setUrls={setUrls}
+              formPhoto={formPhoto}
+              handleUploadFoto={handleUploadFoto}
+              loadingFile={loadingFile}
+            />
           </div>
         }
       />

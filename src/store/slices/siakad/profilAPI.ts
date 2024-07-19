@@ -1,5 +1,8 @@
 import { api, Res } from '@/store/api'
-import { GetSiakadProfilType } from '@/store/type/siakad/profilType'
+import {
+  GetSiakadProfilType,
+  PostProfilBody,
+} from '@/store/type/siakad/profilType'
 
 export const SiakadProfilEndpoints = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -10,7 +13,16 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
       }),
       providesTags: ['siakad-profil'],
     }),
+    updateSiakadProfil: builder.mutation<void, { body: PostProfilBody }>({
+      query: ({ body }) => ({
+        url: `siakad/profil/identitas`,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['siakad-profil'],
+    }),
   }),
 })
 
-export const { useGetSiakadProfilQuery } = SiakadProfilEndpoints
+export const { useGetSiakadProfilQuery, useUpdateSiakadProfilMutation } =
+  SiakadProfilEndpoints
