@@ -2,7 +2,11 @@
 import { UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faArrowLeft,
+  faSave,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons'
 import { FormInputText } from '@/components/InputComponent'
 import { Dispatch, SetStateAction } from 'react'
 
@@ -76,7 +80,7 @@ export default function FormUpdateProfil({
             />
           </div>
           {/* --- Button Group --- */}
-          <div className="flex gap-32">
+          <div className="flex justify-center gap-32">
             <button
               type="reset"
               onClick={async () => {
@@ -84,6 +88,7 @@ export default function FormUpdateProfil({
               }}
               className="flex items-center justify-center gap-12 rounded-2xl bg-danger px-32 py-12 text-white disabled:cursor-not-allowed"
             >
+              <FontAwesomeIcon icon={faArrowLeft} />
               <p>Batal</p>
             </button>
             <button

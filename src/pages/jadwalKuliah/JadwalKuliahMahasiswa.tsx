@@ -4,6 +4,7 @@ import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import {
   AspekNilaiMahasiswaMenu,
   JadwalKuliahInfo,
+  JadwalKuliahKeterangan,
 } from '@/features/siakad/jadwalKuliah'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -41,6 +42,7 @@ export default function JadwalKuliahMahasiswa() {
         )}
       </div>
 
+      <JadwalKuliahKeterangan />
       <div>
         {loadingNilaiMahasiswa ? (
           <SkeletonText lines={1} className="w-1/4 phones:w-1/2" />

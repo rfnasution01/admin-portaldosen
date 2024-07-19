@@ -103,6 +103,7 @@ export default {
         },
         neutral: {
           white: '#FAFAFA',
+          yellow: '#FAFABE',
           secondary: '#F0F7FF',
           black: '#1C1C1C',
         },

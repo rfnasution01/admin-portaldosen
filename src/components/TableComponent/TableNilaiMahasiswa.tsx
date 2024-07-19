@@ -45,7 +45,7 @@ export function TableMahasiswa({
 
   return (
     <div
-      className={`h-full w-full overflow-y-auto rounded-2xl bg-white phones:h-auto phones:overflow-visible`}
+      className={`h-full w-full overflow-visible rounded-2xl bg-white phones:h-auto`}
     >
       {loading ? (
         <Loading width="6.4rem" height="6.4rem" />
