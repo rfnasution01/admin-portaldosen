@@ -4,17 +4,17 @@ import { columnsListJadwalKuliah } from '@/components/TableComponent/column'
 import { useSiakadDashboard } from '@/data/siakad/dashboard/useDashboard'
 import { useSiakadProfil } from '@/data/siakad/useProfil'
 
-export default function JadwalKuliahDetail() {
+export default function Dashboard() {
   const { profil } = useSiakadProfil()
   const { kataBijak, loadingKataBijak, jadwalKuliah, loadingJadwalKuliah } =
     useSiakadDashboard()
 
   return (
     <div className="scrollbar flex h-full  w-full flex-col gap-32 overflow-y-auto p-32">
-      <p className="text-black-300 font-sans text-[2.8rem] font-bold">
+      <p className="font-sans text-[2.8rem] font-bold text-black-300">
         Selamat Datang, Pak {profil?.identitas?.nama}
       </p>
-      <div className="bg-neutral-secondary text-neutral-black flex flex-col rounded-2xl border p-32 font-mono text-[2.2rem]">
+      <div className="flex flex-col rounded-2xl border bg-neutral-secondary p-32 font-mono text-[2.2rem] text-neutral-black">
         {loadingKataBijak ? (
           <SkeletonText lines={2} />
         ) : (
@@ -24,7 +24,7 @@ export default function JadwalKuliahDetail() {
           </>
         )}
       </div>
-      <p className="text-black-300 font-sans text-[2.8rem] font-bold">
+      <p className="font-sans text-[2.8rem] font-bold text-black-300">
         Jadwal Perkuliahan
       </p>
       <Table

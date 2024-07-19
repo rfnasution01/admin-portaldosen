@@ -2,7 +2,9 @@ import { createBrowserRouter, redirect } from 'react-router-dom'
 import {
   ComingSoonPage,
   CommonLayout,
+  DashboardPage,
   JadwalKuliahDetailPage,
+  JadwalKuliahMahasiswaPage,
   JadwalKuliahPage,
   LoginLayout,
   MainLayout,
@@ -29,17 +31,17 @@ export const router = createBrowserRouter([
         children: [
           {
             path: '',
-            element: <JadwalKuliahPage />,
+            element: <DashboardPage />,
           },
         ],
       },
       {
-        path: 'jadwal-kuliah',
+        path: 'jadwal-perkuliahan',
         element: <CommonLayout />,
         children: [
           {
             path: '',
-            element: <ComingSoonPage />,
+            element: <JadwalKuliahPage />,
           },
           {
             path: 'detail',
@@ -47,16 +49,12 @@ export const router = createBrowserRouter([
           },
           {
             path: 'mahasiswa',
-            element: <ComingSoonPage />,
+            element: <JadwalKuliahMahasiswaPage />,
           },
         ],
       },
       {
         path: 'umum',
-        element: <ComingSoonPage />,
-      },
-      {
-        path: 'jadwal-perkuliahan',
         element: <ComingSoonPage />,
       },
       {

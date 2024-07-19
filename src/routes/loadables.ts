@@ -11,12 +11,13 @@ export const MainLayout = loadable(() => import('@/layouts/mainLayout'))
 // ----- Pages -----
 // ------------------
 export const ComingSoonPage = loadable(() => import('@/pages/ComingSoon'))
+export const DashboardPage = loadable(() => import('@/pages/Dashboard'))
 export const JadwalKuliahPage = loadable(
-  () => import('@/pages/dashboard/JadwalKuliah'),
+  () => import('@/pages/jadwalKuliah/JadwalKuliah'),
 )
 export const JadwalKuliahDetailPage = loadable(
-  () => import('@/pages/dashboard/JadwalKuliahDetail'),
+  () => import('@/pages/jadwalKuliah/JadwalKuliahDetail'),
 )
 export const JadwalKuliahMahasiswaPage = loadable(
-  () => import('@/pages/dashboard/JadwalKuliahMahasiswa'),
+  () => import('@/pages/jadwalKuliah/JadwalKuliahMahasiswa'),
 )

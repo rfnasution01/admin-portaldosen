@@ -70,7 +70,7 @@ export function Table<T extends ItemTable, P>({
           {!data || data.length === 0 ? (
             <p className="text-[2rem] text-typography-disabled">No data.</p>
           ) : (
-            <table className="border-black-300 flex-1 border-collapse border bg-white text-[2rem]">
+            <table className="flex-1 border-collapse border border-black-300 bg-white text-[2rem]">
               <thead className="text-warna-primary relative z-10 align-top leading-medium">
                 <tr className="">
                   {/* --- NO --- */}
@@ -113,7 +113,7 @@ export function Table<T extends ItemTable, P>({
                   <Fragment key={rowIndex}>
                     <tr
                       className={clsx(
-                        'text-neutral-black border-black-300 border-b transition-all ease-in odd:bg-surface-disabled hover:cursor-pointer hover:bg-yellow-100',
+                        'border-b border-black-300 text-neutral-black transition-all ease-in odd:bg-surface-disabled hover:cursor-pointer hover:bg-yellow-100',
                       )}
                       onClick={onItemClick ? () => onItemClick(row) : undefined}
                     >
@@ -145,20 +145,20 @@ export function Table<T extends ItemTable, P>({
                         <td className="px-24 py-12 align-top leading-medium">
                           <div className="flex items-center justify-center gap-12">
                             <Link
-                              to={'jadwal-kuliah/detail'}
+                              to={'jadwal-perkuliahan/detail'}
                               onClick={() => {
                                 localStorage.setItem('editId', row?.id)
                               }}
-                              className="bg-info rounded-lg px-12 py-4 text-neutral-white"
+                              className="rounded-lg bg-info px-12 py-4 text-neutral-white"
                             >
                               <FontAwesomeIcon icon={faUser} />
                             </Link>
                             <Link
-                              to={'jadwal-kuliah/mahasiswa'}
+                              to={'jadwal-perkuliahan/mahasiswa'}
                               onClick={() => {
                                 localStorage.setItem('editId', row?.id)
                               }}
-                              className="bg-info rounded-lg px-12 py-4 text-neutral-white"
+                              className="rounded-lg bg-info px-12 py-4 text-neutral-white"
                             >
                               <FontAwesomeIcon icon={faFolder} />
                             </Link>
