@@ -193,8 +193,8 @@ export function useSiakadProfil() {
         transition: Bounce,
       })
       setTimeout(() => {
-        setIsShowProfil(false)
         formUpdateProfil.reset()
+        setIsShowProfil(false)
       }, 3000)
     }
   }, [isSuccessEditProfil])
@@ -230,7 +230,7 @@ export function useSiakadProfil() {
       formUpdateProfil.setValue('nidn', profil?.identitas?.nidn)
       formUpdateProfil.setValue('email', profil?.identitas?.email)
     }
-  }, [profil])
+  }, [profil, isSuccessEditProfil])
 
   return {
     profil,

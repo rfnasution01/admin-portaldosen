@@ -1,9 +1,11 @@
 import { api, Res } from '@/store/api'
 import {
+  GetSiakadBobotNilaiTyoe,
   GetSiakadJadwalKuliahMahasiswaType,
   GetSiakadJadwalKuliahNilaiMahasiswaType,
   GetSiakadJadwalKuliahType,
   GetSiakadKataBijakType,
+  PostJadwalKuliahType,
 } from '@/store/type/siakad/jadwalKuliahType'
 
 export const SiakadProfilEndpoints = api.injectEndpoints({
@@ -64,6 +66,20 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
       }),
       providesTags: ['siakad-nilai-mahasiswa'],
     }),
+    getBobotNilai: builder.query<Res<GetSiakadBobotNilaiTyoe[]>, void>({
+      query: () => ({
+        url: `siakad/bobot_nilai`,
+        method: 'GET',
+      }),
+    }),
+    updateNilai: builder.mutation<void, { body: PostJadwalKuliahType }>({
+      query: ({ body }) => ({
+        url: `siakad/jadwal_kuliah_mhs_nilai_aspek`,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['siakad-nilai-mahasiswa'],
+    }),
   }),
 })
 
@@ -73,4 +89,6 @@ export const {
   useGetSiakadJadwalKuliahMahasiswaQuery,
   useGetSiakadJadwalKuliahQuery,
   useGetSiakadNilaiMahasiswaQuery,
+  useGetBobotNilaiQuery,
+  useUpdateNilaiMutation,
 } = SiakadProfilEndpoints

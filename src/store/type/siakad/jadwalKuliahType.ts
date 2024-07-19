@@ -40,6 +40,7 @@ export type SiakadNilaiMahasiswaType = {
   idm: string
   nim: string
   nama: string
+  id_mk: string
   nilai_akhir: string
   huruf: string
   sks: string
@@ -52,4 +53,17 @@ export type SiakadAspekNilaiType = {
   nilai: string
   persen: string
   nama: string
+}
+
+export type GetSiakadBobotNilaiTyoe = {
+  nilai: string
+  nilai_min: string
+  nilai_max: string
+}
+
+export type PostJadwalKuliahType = {
+  idm: string
+  id_mk: string
+  id_aspek: string
+  nilai: string
 }

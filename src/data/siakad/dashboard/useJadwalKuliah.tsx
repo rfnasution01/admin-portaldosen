@@ -3,23 +3,37 @@ import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { Bounce, toast } from 'react-toastify'
 import {
+  GetSiakadBobotNilaiTyoe,
   GetSiakadJadwalKuliahMahasiswaType,
   GetSiakadJadwalKuliahNilaiMahasiswaType,
   GetSiakadJadwalKuliahType,
 } from '@/store/type/siakad/jadwalKuliahType'
 import {
+  useGetBobotNilaiQuery,
   useGetSiakadJadwalKuliahDetailQuery,
   useGetSiakadJadwalKuliahMahasiswaQuery,
   useGetSiakadNilaiMahasiswaQuery,
+  useUpdateNilaiMutation,
 } from '@/store/slices/siakad/jadwalKuliahAPI'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+import { useForm } from 'react-hook-form'
+import { SiakadJadwalKuliahSchema } from '@/store/schema/siakad'
 
 export function useSiakadJadwalKuliah() {
   const navigate = useNavigate()
+
+  const [idm, setIdm] = useState<string>()
 
   const id = localStorage.getItem('editId') ?? ''
 
   const [jadwalKuliahDetail, setJadwalKuliahDetail] =
     useState<GetSiakadJadwalKuliahType>()
+
+  const form = useForm<zod.infer<typeof SiakadJadwalKuliahSchema>>({
+    resolver: zodResolver(SiakadJadwalKuliahSchema),
+    defaultValues: {},
+  })
 
   const {
     data: dataJadwalKuliah,
@@ -116,6 +130,82 @@ export function useSiakadJadwalKuliah() {
     }
   }, [dataNilaiMahasiswa, id])
 
+  // --- Bobot Nilai ---
+  const [bobot, setBobot] = useState<GetSiakadBobotNilaiTyoe[]>([])
+
+  const { data: dataBobot } = useGetBobotNilaiQuery()
+
+  useEffect(() => {
+    if (dataBobot) {
+      setBobot(dataBobot?.data)
+    }
+  }, [dataBobot])
+
+  // --- Update Nilai ---
+  const [
+    createNilai,
+    {
+      isError: isErrorEditNilai,
+      error: errorEditNilai,
+      isLoading: isLoadingEditNilai,
+      isSuccess: isSuccessEditNilai,
+    },
+  ] = useUpdateNilaiMutation()
+
+  const handleSubmit = async () => {
+    const values = form.getValues()
+
+    const body = {
+      idm: idm,
+      id_mk: values?.id_mk,
+      id_aspek: values?.id_aspek,
+      nilai: form.getValues(`nilai_${idm}`),
+    }
+
+    try {
+      await createNilai({ body: body })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    if (isSuccessEditNilai) {
+      toast.success(`Update nilai berhasil`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      })
+      setTimeout(() => {
+        form.reset()
+      }, 3000)
+    }
+  }, [isSuccessEditNilai])
+
+  useEffect(() => {
+    if (isErrorEditNilai) {
+      const errorMsg = errorEditNilai as { data?: { message?: string } }
+
+      toast.error(`${errorMsg?.data?.message ?? 'Terjadi Kesalahan'}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      })
+    }
+  }, [isErrorEditNilai, errorEditNilai])
+
   return {
     loadingJadwalKuliah,
     jadwalKuliahDetail,
@@ -123,5 +213,11 @@ export function useSiakadJadwalKuliah() {
     jadwalKuliahMahasiswa,
     loadingNilaiMahasiswa,
     nilaiMahasiswa,
+    bobot,
+    isLoadingEditNilai,
+    handleSubmit,
+    form,
+    idm,
+    setIdm,
   }
 }

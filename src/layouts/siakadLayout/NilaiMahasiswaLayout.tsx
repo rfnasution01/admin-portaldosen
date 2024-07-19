@@ -1,5 +1,4 @@
 import SkeletonText from '@/components/SkeletonComonent/SkeletonText'
-import { TableMahasiswa } from '@/components/TableComponent/TableNilaiMahasiswa'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import {
   AspekNilaiMahasiswaMenu,
@@ -8,9 +7,9 @@ import {
 } from '@/features/siakad/jadwalKuliah'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
-export default function JadwalKuliahMahasiswa() {
+export default function NilaiMahasiswaLayout() {
   const navigate = useNavigate()
 
   const {
@@ -51,12 +50,7 @@ export default function JadwalKuliahMahasiswa() {
         )}
       </div>
 
-      <TableMahasiswa
-        response={nilaiMahasiswa}
-        loading={loadingNilaiMahasiswa}
-        pageSize={1000}
-        currentPage={1}
-      />
+      <Outlet />
     </div>
   )
 }

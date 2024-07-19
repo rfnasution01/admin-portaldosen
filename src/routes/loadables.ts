@@ -6,6 +6,9 @@ import loadable from '@loadable/component'
 export const CommonLayout = loadable(() => import('@/layouts/CommonLayout'))
 export const LoginLayout = loadable(() => import('@/layouts/loginLayout'))
 export const MainLayout = loadable(() => import('@/layouts/mainLayout'))
+export const NilaiMahasiswaLayout = loadable(
+  () => import('@/layouts/siakadLayout/NilaiMahasiswaLayout'),
+)
 
 // ------------------
 // ----- Pages -----
@@ -22,6 +25,9 @@ export const JadwalKuliahPage = loadable(
 export const JadwalKuliahDetailPage = loadable(
   () => import('@/pages/jadwalKuliah/JadwalKuliahDetail'),
 )
-export const JadwalKuliahMahasiswaPage = loadable(
-  () => import('@/pages/jadwalKuliah/JadwalKuliahMahasiswa'),
+export const NilaiMahasiswaPage = loadable(
+  () => import('@/pages/jadwalKuliah/NilaiMahasiswa'),
+)
+export const NilaiMahasiswaPerAspekPage = loadable(
+  () => import('@/pages/jadwalKuliah/NilaiMahasiswaPerAspek'),
 )

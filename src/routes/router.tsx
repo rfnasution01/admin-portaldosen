@@ -5,10 +5,12 @@ import {
   DashboardPage,
   EditTahunAkademikPage,
   JadwalKuliahDetailPage,
-  JadwalKuliahMahasiswaPage,
   JadwalKuliahPage,
   LoginLayout,
   MainLayout,
+  NilaiMahasiswaLayout,
+  NilaiMahasiswaPage,
+  NilaiMahasiswaPerAspekPage,
 } from './loadables'
 import Cookies from 'js-cookie'
 
@@ -50,7 +52,17 @@ export const router = createBrowserRouter([
           },
           {
             path: 'mahasiswa',
-            element: <JadwalKuliahMahasiswaPage />,
+            element: <NilaiMahasiswaLayout />,
+            children: [
+              {
+                path: '',
+                element: <NilaiMahasiswaPage />,
+              },
+              {
+                path: ':aspek',
+                element: <NilaiMahasiswaPerAspekPage />,
+              },
+            ],
           },
         ],
       },
