@@ -137,9 +137,9 @@ export function MainAside({
 const EditButton: React.FC<EditButtonProps> = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="absolute right-8 top-8 rounded-2xl bg-secondary-shade-100 px-4 py-8 text-white hover:bg-opacity-80"
+    className="absolute right-8 top-8 rounded-2xl text-[2.8rem] hover:bg-opacity-80"
     aria-label="Edit"
   >
-    ✏️
+    🎦
   </button>
 )

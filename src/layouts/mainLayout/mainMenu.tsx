@@ -29,6 +29,8 @@ export function MainMenu({
   const isActivePage = (item: string) => {
     if (
       (item.toLowerCase() === 'dashboard' && firstPathname === '') ||
+      (item.toLocaleLowerCase() === 'dashboard' &&
+        firstPathname === 'edit-ta') ||
       convertToSlug(item) === firstPathname
     ) {
       return true
