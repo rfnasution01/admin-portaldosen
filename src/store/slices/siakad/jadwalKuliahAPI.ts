@@ -1,9 +1,10 @@
 import { api, Res } from '@/store/api'
 import {
   GetSiakadJadwalKuliahMahasiswaType,
+  GetSiakadJadwalKuliahNilaiMahasiswaType,
   GetSiakadJadwalKuliahType,
   GetSiakadKataBijakType,
-} from '@/store/type/siakad/jadwalKuliah'
+} from '@/store/type/siakad/jadwalKuliahType'
 
 export const SiakadProfilEndpoints = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -50,6 +51,19 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
       }),
       providesTags: ['siakad-profil'],
     }),
+    getSiakadNilaiMahasiswa: builder.query<
+      Res<GetSiakadJadwalKuliahNilaiMahasiswaType>,
+      { id_jadwal: string }
+    >({
+      query: ({ id_jadwal }) => ({
+        url: `siakad/jadwal_kuliah_mhs_nilai`,
+        method: 'GET',
+        params: {
+          id_jadwal: id_jadwal,
+        },
+      }),
+      providesTags: ['siakad-nilai-mahasiswa'],
+    }),
   }),
 })
 
@@ -58,4 +72,5 @@ export const {
   useGetSiakadJadwalKuliahDetailQuery,
   useGetSiakadJadwalKuliahMahasiswaQuery,
   useGetSiakadJadwalKuliahQuery,
+  useGetSiakadNilaiMahasiswaQuery,
 } = SiakadProfilEndpoints

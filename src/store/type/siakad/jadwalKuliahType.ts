@@ -28,3 +28,26 @@ export type GetSiakadJadwalKuliahMahasiswaType = {
   jenis_kelamin: string
   foto: string
 }
+
+export type GetSiakadJadwalKuliahNilaiMahasiswaType = {
+  data: SiakadNilaiMahasiswaType[]
+  aspek_nilai: SiakadAspekNilaiType[]
+}
+
+export type SiakadNilaiMahasiswaType = {
+  idm: string
+  nim: string
+  nama: string
+  nilai_akhir: string
+  huruf: string
+  sks: string
+  mutu: string
+  nilai_aspek: SiakadAspekNilaiType[]
+}
+
+export type SiakadAspekNilaiType = {
+  id: string
+  nilai: string
+  persen: string
+  nama: string
+}

@@ -1,7 +1,7 @@
 import {
   GetSiakadJadwalKuliahMahasiswaType,
   GetSiakadJadwalKuliahType,
-} from '@/store/type/siakad/jadwalKuliah'
+} from '@/store/type/siakad/jadwalKuliahType'
 import { Column } from '..'
 import { getInitials } from '@/utils/formatText'
 
@@ -45,7 +45,7 @@ export const columnsListJadwalKuliahMahasiswa: Column<GetSiakadJadwalKuliahMahas
                 loading="lazy"
               />
             ) : (
-              <div className="text-black-300 flex h-[4rem] w-[4rem] items-center justify-center rounded-xl bg-[#D9D9D9]">
+              <div className="flex h-[4rem] w-[4rem] items-center justify-center rounded-xl bg-[#D9D9D9] text-black-300">
                 <p>{getInitials(rowData?.nama)}</p>
               </div>
             )}

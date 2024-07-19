@@ -5,7 +5,7 @@ import { Bounce, toast } from 'react-toastify'
 import {
   GetSiakadJadwalKuliahType,
   GetSiakadKataBijakType,
-} from '@/store/type/siakad/jadwalKuliah'
+} from '@/store/type/siakad/jadwalKuliahType'
 import {
   useGetSiakadJadwalKuliahQuery,
   useGetSiakadKataBijakQuery,

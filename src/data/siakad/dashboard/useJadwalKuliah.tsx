@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react'
 import { Bounce, toast } from 'react-toastify'
 import {
   GetSiakadJadwalKuliahMahasiswaType,
+  GetSiakadJadwalKuliahNilaiMahasiswaType,
   GetSiakadJadwalKuliahType,
-} from '@/store/type/siakad/jadwalKuliah'
+} from '@/store/type/siakad/jadwalKuliahType'
 import {
   useGetSiakadJadwalKuliahDetailQuery,
   useGetSiakadJadwalKuliahMahasiswaQuery,
+  useGetSiakadNilaiMahasiswaQuery,
 } from '@/store/slices/siakad/jadwalKuliahAPI'
 
 export function useSiakadJadwalKuliah() {
@@ -90,10 +92,36 @@ export function useSiakadJadwalKuliah() {
     }
   }, [dataJadwalKuliahMahasiswa, id])
 
+  // --- Nilai Mahasiswa ---
+  const [nilaiMahasiswa, setNilaiMahasiswa] =
+    useState<GetSiakadJadwalKuliahNilaiMahasiswaType>()
+
+  const {
+    data: dataNilaiMahasiswa,
+    isLoading: isLoadingNilaiMahasiswa,
+    isFetching: isFetchingNilaiMahasiswa,
+  } = useGetSiakadNilaiMahasiswaQuery(
+    {
+      id_jadwal: id,
+    },
+    { skip: !id || id === '' },
+  )
+
+  const loadingNilaiMahasiswa =
+    isFetchingNilaiMahasiswa || isLoadingNilaiMahasiswa
+
+  useEffect(() => {
+    if (dataNilaiMahasiswa) {
+      setNilaiMahasiswa(dataNilaiMahasiswa?.data)
+    }
+  }, [dataNilaiMahasiswa, id])
+
   return {
     loadingJadwalKuliah,
     jadwalKuliahDetail,
     loadingJadwalKuliahMahasiswa,
     jadwalKuliahMahasiswa,
+    loadingNilaiMahasiswa,
+    nilaiMahasiswa,
   }
 }

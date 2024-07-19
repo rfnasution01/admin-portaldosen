@@ -57,7 +57,9 @@ export function Table<T extends ItemTable, P>({
     typeof columns === 'function' ? columns(columnProps as P) : columns
 
   return (
-    <div className={`h-full rounded-2xl ${containerClasses}`}>
+    <div
+      className={`scrollbar h-full overflow-y-auto rounded-2xl phones:h-auto phones:overflow-visible ${containerClasses}`}
+    >
       {/* ----- Loading UI ----- */}
       {loading ? (
         <Loading width="6.4rem" height="6.4rem" />
@@ -71,7 +73,7 @@ export function Table<T extends ItemTable, P>({
             <p className="text-[2rem] text-typography-disabled">No data.</p>
           ) : (
             <table className="flex-1 border-collapse border border-black-300 bg-white text-[2rem]">
-              <thead className="text-warna-primary relative z-10 align-top leading-medium">
+              <thead className="relative z-10 align-top leading-medium text-neutral-white">
                 <tr className="">
                   {/* --- NO --- */}
                   {isNumber && pageSize && currentPage && (
@@ -145,7 +147,7 @@ export function Table<T extends ItemTable, P>({
                         <td className="px-24 py-12 align-top leading-medium">
                           <div className="flex items-center justify-center gap-12">
                             <Link
-                              to={'jadwal-perkuliahan/detail'}
+                              to={'/jadwal-perkuliahan/detail'}
                               onClick={() => {
                                 localStorage.setItem('editId', row?.id)
                               }}
@@ -154,7 +156,7 @@ export function Table<T extends ItemTable, P>({
                               <FontAwesomeIcon icon={faUser} />
                             </Link>
                             <Link
-                              to={'jadwal-perkuliahan/mahasiswa'}
+                              to={'/jadwal-perkuliahan/mahasiswa'}
                               onClick={() => {
                                 localStorage.setItem('editId', row?.id)
                               }}
