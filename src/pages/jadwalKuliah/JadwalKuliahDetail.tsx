@@ -1,8 +1,8 @@
-import { LabelJadwalKuliah } from '@/components/LabelComponent'
 import SkeletonText from '@/components/SkeletonComonent/SkeletonText'
 import { Table } from '@/components/TableComponent'
 import { columnsListJadwalKuliahMahasiswa } from '@/components/TableComponent/column'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
+import { JadwalKuliahInfo } from '@/features/siakad/jadwalKuliah'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
@@ -23,48 +23,23 @@ export default function JadwalKuliahDetail() {
         onClick={() => {
           navigate(-1)
         }}
-        className="text-black-300 flex items-center gap-12 font-sans text-[2.2rem] hover:cursor-pointer hover:text-primary-active"
+        className="flex items-center gap-12 font-sans text-[2.2rem] text-black-300 hover:cursor-pointer hover:text-primary-active"
       >
         <FontAwesomeIcon icon={faArrowLeftLong} />
         <p>Kembali</p>
       </div>
 
-      <p className="text-black-300 font-sans text-[2.8rem] font-bold">
+      <p className="font-sans text-[2.8rem] font-bold text-black-300">
         Jadwal Perkuliahan
       </p>
-      <div className="bg-primary-50 flex flex-col gap-8 border-l-2 border-primary-900 p-32">
+      <div className="flex flex-col gap-8 border-l-2 border-primary-900 bg-primary-50 p-32">
         {loadingJadwalKuliah ? (
           <SkeletonText lines={4} />
         ) : (
-          <>
-            <LabelJadwalKuliah
-              label1="Mata Kuliah"
-              value1={jadwalKuliahDetail?.nama_mk}
-              label2="Tahun Ajaran / Tahapan"
-              value2={`${jadwalKuliahDetail?.tahun} / ${jadwalKuliahDetail?.tahap}`}
-            />
-            <LabelJadwalKuliah
-              label1="Fakultas"
-              value1={jadwalKuliahDetail?.fakultas}
-              label2="Ruangan"
-              value2={jadwalKuliahDetail?.nama_kelas}
-            />
-            <LabelJadwalKuliah
-              label1="Program Studi"
-              value1={jadwalKuliahDetail?.prodi}
-              label2="Hari / Sesi"
-              value2={`${jadwalKuliahDetail?.hari ?? '-'} / ${jadwalKuliahDetail?.jam_mulai ?? '-'} - ${jadwalKuliahDetail?.jam_selesai ?? '-'}`}
-            />
-            <LabelJadwalKuliah
-              label1="Dosen"
-              value1=""
-              label2="Kelas Perkuliahan"
-              value2={jadwalKuliahDetail?.kode_mk}
-            />
-          </>
+          <JadwalKuliahInfo jadwalKuliahDetail={jadwalKuliahDetail} />
         )}
       </div>
-      <p className="text-black-300 font-sans text-[2.8rem] font-bold">
+      <p className="font-sans text-[2.8rem] font-bold text-black-300">
         Daftar Mahasiswa Peserta
       </p>
       <Table

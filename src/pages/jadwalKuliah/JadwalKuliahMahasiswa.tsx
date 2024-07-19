@@ -1,8 +1,10 @@
-import { LabelJadwalKuliah } from '@/components/LabelComponent'
 import SkeletonText from '@/components/SkeletonComonent/SkeletonText'
 import { TableMahasiswa } from '@/components/TableComponent/TableNilaiMahasiswa'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
-import { AspekNilaiMahasiswaMenu } from '@/features/siakad/jadwalKuliah'
+import {
+  AspekNilaiMahasiswaMenu,
+  JadwalKuliahInfo,
+} from '@/features/siakad/jadwalKuliah'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
@@ -35,32 +37,7 @@ export default function JadwalKuliahMahasiswa() {
         {loadingJadwalKuliah ? (
           <SkeletonText lines={4} />
         ) : (
-          <>
-            <LabelJadwalKuliah
-              label1="Mata Kuliah"
-              value1={jadwalKuliahDetail?.nama_mk}
-              label2="Tahun Ajaran / Tahapan"
-              value2={`${jadwalKuliahDetail?.tahun} / ${jadwalKuliahDetail?.tahap}`}
-            />
-            <LabelJadwalKuliah
-              label1="Fakultas"
-              value1={jadwalKuliahDetail?.fakultas}
-              label2="Ruangan"
-              value2={jadwalKuliahDetail?.nama_kelas}
-            />
-            <LabelJadwalKuliah
-              label1="Program Studi"
-              value1={jadwalKuliahDetail?.prodi}
-              label2="Hari / Sesi"
-              value2={`${jadwalKuliahDetail?.hari ?? '-'} / ${jadwalKuliahDetail?.jam_mulai ?? '-'} - ${jadwalKuliahDetail?.jam_selesai ?? '-'}`}
-            />
-            <LabelJadwalKuliah
-              label1="Dosen"
-              value1=""
-              label2="Kelas Perkuliahan"
-              value2={jadwalKuliahDetail?.kode_mk}
-            />
-          </>
+          <JadwalKuliahInfo jadwalKuliahDetail={jadwalKuliahDetail} />
         )}
       </div>
 

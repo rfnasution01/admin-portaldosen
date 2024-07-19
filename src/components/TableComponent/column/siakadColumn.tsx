@@ -14,7 +14,7 @@ export const columnsListJadwalKuliah: Column<GetSiakadJadwalKuliahType>[] = [
   { header: 'Mata Kuliah', key: 'nama_mk', width: '!min-w-[12rem]' },
   { header: 'SKS', key: 'sks_mk', width: '!min-w-[12rem]' },
   { header: 'Kelas', key: 'nama_kelas', width: '!min-w-[12rem]' },
-  { header: 'Ruang', key: 'nama_kelas', width: '!min-w-[12rem]' },
+  { header: 'Ruang', key: 'ruangan', width: '!min-w-[12rem]' },
   {
     header: 'Hari/Jam',
     key: 'hari',
