@@ -51,7 +51,7 @@ export function useTahunAkademik() {
 
   useEffect(() => {
     if (isSuccessEditTahunAkademik) {
-      toast.success(`Update TahunAkademik berhasil`, {
+      toast.success(`Update Tahun Akademik berhasil`, {
         position: 'bottom-right',
         autoClose: 3000,
         hideProgressBar: false,
@@ -63,6 +63,8 @@ export function useTahunAkademik() {
         transition: Bounce,
       })
       setTimeout(() => {
+        setIsShow(false)
+        setIsSubmit(false)
         form.reset()
         navigate(-1)
       }, 3000)
@@ -84,6 +86,8 @@ export function useTahunAkademik() {
         theme: 'light',
         transition: Bounce,
       })
+      setIsShow(false)
+      setIsSubmit(false)
     }
   }, [isErrorEditTahunAkademik, errorEditTahunAkademik])
 

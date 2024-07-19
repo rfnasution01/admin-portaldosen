@@ -28,8 +28,8 @@ export function FormInputFile({
   form: UseFormReturn | undefined | any
   setUrls: Dispatch<SetStateAction<string>>
   urls: string
-  isLoading: boolean
-  loadingFile: boolean
+  isLoading?: boolean
+  loadingFile?: boolean
   name: string
   label?: string
   handleUploadFoto: (file: File) => Promise<void>
@@ -83,8 +83,8 @@ export function FormInputFile({
                       className={clsx(
                         'flex items-center gap-12 rounded-2xl p-12 hover:cursor-pointer hover:bg-opacity-80',
                         {
-                          'bg-warna-dark text-white': urls,
-                          'border border-warna-dark text-warna-dark': !urls,
+                          'bg-primary-900 text-neutral-white': urls,
+                          'border border-primary-900 text-primary-900': !urls,
                         },
                       )}
                     >
@@ -104,9 +104,9 @@ export function FormInputFile({
                   </div>
                 </label>
 
-                <div className="flex w-full flex-wrap items-start gap-32 whitespace-nowrap text-warna-dark phones:w-full">
+                <div className="flex w-[50rem] flex-wrap items-start gap-32 whitespace-nowrap text-primary-900 phones:w-full">
                   {urls ? (
-                    <div className="relative flex w-1/4 flex-col items-center gap-4 phones:w-1/2">
+                    <div className="relative flex w-full flex-col items-center gap-4 phones:w-1/2">
                       <div className="relative w-full">
                         <img
                           src={urls}
@@ -122,7 +122,7 @@ export function FormInputFile({
                             e.stopPropagation()
                             setUrls(null)
                           }}
-                          className="bg-danger-700 hover:bg-danger absolute right-8 top-8 rounded-lg p-4 text-white hover:cursor-pointer disabled:cursor-not-allowed"
+                          className="bg-danger-700 absolute right-8 top-8 rounded-lg p-4 text-white hover:cursor-pointer hover:bg-danger disabled:cursor-not-allowed"
                         >
                           <FontAwesomeIcon icon={faTrash} />
                         </button>
