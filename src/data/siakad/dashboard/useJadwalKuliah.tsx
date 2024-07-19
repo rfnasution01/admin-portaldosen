@@ -19,11 +19,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { useForm } from 'react-hook-form'
 import { SiakadJadwalKuliahSchema } from '@/store/schema/siakad'
+import { rowType } from '@/components/FormComponent/siakad'
 
 export function useSiakadJadwalKuliah() {
   const navigate = useNavigate()
 
-  const [idm, setIdm] = useState<string>()
+  const editID = localStorage?.getItem('editID') ?? ''
+
+  const [postData, setPostData] = useState<{
+    id_mk: string
+    id_aspek: string
+  }>()
 
   const id = localStorage.getItem('editId') ?? ''
 
@@ -109,6 +115,9 @@ export function useSiakadJadwalKuliah() {
   // --- Nilai Mahasiswa ---
   const [nilaiMahasiswa, setNilaiMahasiswa] =
     useState<GetSiakadJadwalKuliahNilaiMahasiswaType>()
+  const [nilaiMahasiswaTransform, setNilaiMahasiswaTransform] = useState<
+    rowType[]
+  >([])
 
   const {
     data: dataNilaiMahasiswa,
@@ -127,6 +136,48 @@ export function useSiakadJadwalKuliah() {
   useEffect(() => {
     if (dataNilaiMahasiswa) {
       setNilaiMahasiswa(dataNilaiMahasiswa?.data)
+
+      const transformResponse = (
+        response: GetSiakadJadwalKuliahNilaiMahasiswaType,
+        editID: string,
+      ) => {
+        return response?.data?.map((mahasiswa) => {
+          const transformedAspekNilai: { [key: string]: string | null } = {}
+
+          response?.aspek_nilai?.forEach((aspek) => {
+            if (aspek?.id === editID) {
+              const matchedAspek = mahasiswa?.nilai_aspek?.find(
+                (nilaiAspek) => nilaiAspek?.id === aspek?.id,
+              )
+              transformedAspekNilai[aspek?.nama as string] = matchedAspek
+                ? matchedAspek?.nilai
+                : null
+            }
+          })
+
+          return {
+            idm: mahasiswa?.idm,
+            id_mk: mahasiswa?.id_mk,
+            nim: mahasiswa?.nim,
+            nama: mahasiswa?.nama,
+            nilai_akhir: mahasiswa?.nilai_akhir,
+            huruf: mahasiswa?.huruf,
+            sks: mahasiswa?.sks,
+            mutu: mahasiswa?.mutu,
+            ...transformedAspekNilai,
+          }
+        })
+      }
+
+      const nilaiTransform = transformResponse(dataNilaiMahasiswa?.data, editID)
+      setPostData({
+        id_mk: nilaiTransform?.[0]?.id_mk,
+        id_aspek: editID,
+      })
+
+      setNilaiMahasiswaTransform(
+        transformResponse(dataNilaiMahasiswa?.data, editID),
+      )
     }
   }, [dataNilaiMahasiswa, id])
 
@@ -152,14 +203,12 @@ export function useSiakadJadwalKuliah() {
     },
   ] = useUpdateNilaiMutation()
 
-  const handleSubmit = async () => {
-    const values = form.getValues()
-
+  const handleSubmit = async (idm: string) => {
     const body = {
       idm: idm,
-      id_mk: values?.id_mk,
-      id_aspek: values?.id_aspek,
-      nilai: form.getValues(`nilai_${idm}`),
+      id_mk: postData?.id_mk,
+      id_aspek: postData?.id_aspek,
+      nilai: form.watch(`nilai_${idm}`),
     }
 
     try {
@@ -217,7 +266,6 @@ export function useSiakadJadwalKuliah() {
     isLoadingEditNilai,
     handleSubmit,
     form,
-    idm,
-    setIdm,
+    nilaiMahasiswaTransform,
   }
 }

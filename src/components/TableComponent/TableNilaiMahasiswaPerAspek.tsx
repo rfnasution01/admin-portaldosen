@@ -1,55 +1,39 @@
 import { GetSiakadJadwalKuliahNilaiMahasiswaType } from '@/store/type/siakad/jadwalKuliahType'
 import { Loading } from '../Loading'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
-import FormJadwalKuliah from '../FormComponent/siakad/FormJadwalKuliah'
+import FormJadwalKuliah, {
+  rowType,
+} from '../FormComponent/siakad/FormJadwalKuliah'
+import LoadingGif from '@/assets/imgs/loading.gif'
 
 export function TableMahasiswaPerAspek({
   response,
   loading,
   currentPage,
   pageSize,
+  nilaiMahasiswa,
 }: {
-  response: GetSiakadJadwalKuliahNilaiMahasiswaType
+  nilaiMahasiswa: GetSiakadJadwalKuliahNilaiMahasiswaType
+  response: rowType[]
   loading: boolean
   currentPage: number
   pageSize: number
 }) {
   const editID = localStorage?.getItem('editID') ?? ''
 
-  const { isLoadingEditNilai, handleSubmit, form, setIdm } =
-    useSiakadJadwalKuliah()
+  const { handleSubmit, form } = useSiakadJadwalKuliah()
 
-  const transformResponse = (
-    response: GetSiakadJadwalKuliahNilaiMahasiswaType,
-    editID: string,
-  ) => {
-    return response?.data?.map((mahasiswa) => {
-      const transformedAspekNilai: { [key: string]: string | null } = {}
+  const [loadingStates, setLoadingStates] = useState<{
+    [key: string]: boolean
+  }>({})
 
-      response?.aspek_nilai?.forEach((aspek) => {
-        if (aspek?.id === editID) {
-          const matchedAspek = mahasiswa?.nilai_aspek?.find(
-            (nilaiAspek) => nilaiAspek?.id === aspek?.id,
-          )
-          transformedAspekNilai[aspek?.nama as string] = matchedAspek
-            ? matchedAspek?.nilai
-            : null
-        }
-      })
+  // const key = nilaiMahasiswa?.aspek_nilai?.find(
+  //   (item) => item?.id === editID,
+  // )?.nama
 
-      return {
-        idm: mahasiswa?.idm,
-        id_mk: mahasiswa?.id_mk,
-        nim: mahasiswa?.nim,
-        nama: mahasiswa?.nama,
-        nilai_akhir: mahasiswa?.nilai_akhir,
-        huruf: mahasiswa?.huruf,
-        sks: mahasiswa?.sks,
-        mutu: mahasiswa?.mutu,
-        ...transformedAspekNilai,
-      }
-    })
+  const handleLoading = (idm: string, isLoading: boolean) => {
+    setLoadingStates((prev) => ({ ...prev, [idm]: isLoading }))
   }
 
   return (
@@ -63,7 +47,6 @@ export function TableMahasiswaPerAspek({
           className={`scrollbar flex h-full flex-col overflow-auto phones:h-auto`}
           style={{ scrollbarGutter: 'stable' }}
         >
-          {/* ----- No Data/Fallback UI ----- */}
           <table className="h-full flex-1 border-collapse overflow-y-auto border border-black-300 bg-white text-[2rem] phones:h-auto">
             <thead className="relative z-10 align-top leading-medium text-neutral-white">
               <tr>
@@ -73,12 +56,10 @@ export function TableMahasiswaPerAspek({
                 <th className="px-6 py-6 sticky top-0 w-[15%] border-b-2 bg-primary-900 text-center align-middle uppercase text-white">
                   NIM
                 </th>
-                <th
-                  className={`px-6 py-6 sticky top-0 w-[40%] border-b-2 bg-primary-900 text-left text-center align-middle uppercase text-white`}
-                >
+                <th className="px-6 py-6 sticky top-0 w-[40%] border-b-2 bg-primary-900 text-left text-center align-middle uppercase text-white">
                   Mahasiswa
                 </th>
-                {response?.aspek_nilai
+                {nilaiMahasiswa?.aspek_nilai
                   ?.filter((item) => item?.id === editID)
                   ?.map((item, idx) => (
                     <th
@@ -97,7 +78,7 @@ export function TableMahasiswaPerAspek({
               </tr>
             </thead>
             <tbody>
-              {transformResponse(response, editID)?.map((row, rowIndex) => (
+              {response?.map((row, rowIndex) => (
                 <Fragment key={rowIndex}>
                   <tr
                     className={
@@ -111,10 +92,9 @@ export function TableMahasiswaPerAspek({
                       {row?.nim ?? '-'}
                     </td>
                     <td className="px-24 py-12 text-center align-top leading-medium ">
-                      {row?.nama ?? '-'}
+                      {row?.nama ?? '-'} {row?.idm}
                     </td>
-                    {/* Render each aspek_nilai dynamically */}
-                    {response.aspek_nilai
+                    {nilaiMahasiswa.aspek_nilai
                       ?.filter((item) => item?.id === editID)
                       ?.map((aspek, idx) => (
                         <td
@@ -125,14 +105,17 @@ export function TableMahasiswaPerAspek({
                         </td>
                       ))}
                     <td className="px-24 py-12 text-center align-top leading-medium ">
-                      <FormJadwalKuliah
-                        form={form}
-                        isLoading={isLoadingEditNilai}
-                        handleSubmit={handleSubmit}
-                        row={row}
-                        idAspek={editID}
-                        setIDM={setIdm}
-                      />
+                      {loadingStates[row.idm] ? (
+                        <img src={LoadingGif} alt="Loading" />
+                      ) : (
+                        <FormJadwalKuliah
+                          form={form}
+                          isLoading={loadingStates[row.idm]}
+                          handleSubmit={handleSubmit}
+                          row={row}
+                          setLoading={handleLoading}
+                        />
+                      )}
                     </td>
                   </tr>
                 </Fragment>

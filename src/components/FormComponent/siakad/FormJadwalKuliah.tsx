@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FormInputText } from '@/components/InputComponent'
-import { Dispatch, SetStateAction, useEffect } from 'react'
 
 export type rowType = {
   idm: string
@@ -15,37 +13,32 @@ export type rowType = {
   huruf: string
   sks: string
   mutu: string
+  [key: string]: string | null
 }
+
 export default function FormJadwalKuliah({
   form,
   isLoading,
   handleSubmit,
   row,
-  idAspek,
-  setIDM,
+  setLoading,
 }: {
   form: UseFormReturn
-  setIDM: Dispatch<SetStateAction<string>>
   isLoading: boolean
-  handleSubmit: () => Promise<void>
+  handleSubmit: (idm: string) => Promise<void>
   row: rowType
-  idAspek: string
+  setLoading: (idm: string, isLoading: boolean) => void
 }) {
-  useEffect(() => {
-    if (idAspek) {
-      form.setValue('id_mk', row?.id_mk)
-      form.setValue('id_aspek', idAspek)
-    }
-  }, [idAspek])
+  const onSubmit = async () => {
+    setLoading(row.idm, true)
+    await handleSubmit(row?.idm)
+    setLoading(row.idm, false)
+  }
 
   return (
     <div>
       <Form {...form}>
-        <form
-          className="flex gap-32"
-          onSubmit={form.handleSubmit(handleSubmit)}
-        >
-          {/* --- Field --- */}
+        <form className="flex gap-32" onSubmit={form.handleSubmit(onSubmit)}>
           <FormInputText
             name={`nilai_${row?.idm}`}
             form={form}
@@ -56,10 +49,8 @@ export default function FormJadwalKuliah({
             isFloat
             isNumber
           />
-          {/* --- Button Group --- */}
           <button
             type="submit"
-            onClick={() => setIDM(row?.idm)}
             className="flex items-center justify-center gap-12 rounded-2xl bg-success px-32 py-12 text-white disabled:cursor-not-allowed"
           >
             {isLoading ? (
