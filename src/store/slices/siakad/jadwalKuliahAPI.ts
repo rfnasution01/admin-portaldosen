@@ -12,6 +12,7 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
         url: `siakad/katabijak`,
         method: 'GET',
       }),
+      providesTags: ['siakad-profil'],
     }),
     getSiakadJadwalKuliah: builder.query<
       Res<GetSiakadJadwalKuliahType[]>,
@@ -21,6 +22,7 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
         url: `siakad/jadwal_kuliah`,
         method: 'GET',
       }),
+      providesTags: ['siakad-profil'],
     }),
     getSiakadJadwalKuliahDetail: builder.query<
       Res<GetSiakadJadwalKuliahType>,
@@ -33,6 +35,7 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
           id_jadwal: id_jadwal,
         },
       }),
+      providesTags: ['siakad-profil'],
     }),
     getSiakadJadwalKuliahMahasiswa: builder.query<
       Res<GetSiakadJadwalKuliahMahasiswaType[]>,
@@ -45,6 +48,7 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
           id_jadwal: id_jadwal,
         },
       }),
+      providesTags: ['siakad-profil'],
     }),
   }),
 })

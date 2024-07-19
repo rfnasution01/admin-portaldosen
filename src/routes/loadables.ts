@@ -12,6 +12,10 @@ export const MainLayout = loadable(() => import('@/layouts/mainLayout'))
 // ------------------
 export const ComingSoonPage = loadable(() => import('@/pages/ComingSoon'))
 export const DashboardPage = loadable(() => import('@/pages/Dashboard'))
+export const EditTahunAkademikPage = loadable(
+  () => import('@/pages/EditTahunAkademik'),
+)
+
 export const JadwalKuliahPage = loadable(
   () => import('@/pages/jadwalKuliah/JadwalKuliah'),
 )

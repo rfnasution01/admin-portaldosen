@@ -9,7 +9,7 @@ import {
 import {
   useGetSiakadJadwalKuliahDetailQuery,
   useGetSiakadJadwalKuliahMahasiswaQuery,
-} from '@/store/slices/siakad/jadwalKuliah'
+} from '@/store/slices/siakad/jadwalKuliahAPI'
 
 export function useSiakadJadwalKuliah() {
   const navigate = useNavigate()

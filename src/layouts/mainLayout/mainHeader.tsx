@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import clsx from 'clsx'
 import Cookies from 'js-cookie'
 import { Dispatch, SetStateAction } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MainMenu } from './mainMenu'
 
 export function MainHeader({
@@ -41,14 +41,14 @@ export function MainHeader({
               <p className="phones:hidden"> {profil?.identitas?.nama}</p>
               <p className="phones:hidden">|</p>
               <p className="phones:hidden">
-                {profil?.akademik?.nama_tahun} / {profil?.akademik?.semester}
+                {profil?.akademik?.nama_tahun} / {profil?.akademik?.tahap}
               </p>
               <p className="phones:hidden">|</p>
-              <p>
+              <Link to={'edit-ta'}>
                 <span className="hover:cursor-pointer hover:text-white">
                   <IconDashboard size={12} />
                 </span>
-              </p>
+              </Link>
               <p>|</p>
               <p>
                 <span

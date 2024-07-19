@@ -3,6 +3,7 @@ import {
   ComingSoonPage,
   CommonLayout,
   DashboardPage,
+  EditTahunAkademikPage,
   JadwalKuliahDetailPage,
   JadwalKuliahMahasiswaPage,
   JadwalKuliahPage,
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
       {
         path: 'umum',
         element: <ComingSoonPage />,
+      },
+      {
+        path: 'edit-ta',
+        element: <EditTahunAkademikPage />,
       },
       {
         path: 'Kalender',

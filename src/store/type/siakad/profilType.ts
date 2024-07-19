@@ -16,7 +16,7 @@ export type SiakadProfilType = {
 export type SiakadAkademikType = {
   tahun_id: string
   tahun: string
-  semester: string
+  tahap: string
   nama_tahun: string
   kode_prodi: string
   nama_prodi: string
