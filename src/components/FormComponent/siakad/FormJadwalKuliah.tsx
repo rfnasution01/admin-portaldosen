@@ -3,7 +3,6 @@ import { Form } from '@/components/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FormInputText } from '@/components/InputComponent'
-import { useEffect } from 'react'
 
 export type rowType = {
   idm: string
@@ -24,8 +23,9 @@ export default function FormJadwalKuliah({
   row,
   setLoading,
   isNotDraft,
-  editID,
-  keyString,
+  // editID,
+  // keyString,
+  // isSuccessEditNilai,
 }: {
   form: UseFormReturn
   isNotDraft: boolean
@@ -35,37 +35,46 @@ export default function FormJadwalKuliah({
   setLoading: (idm: string, isLoading: boolean) => void
   editID: string
   keyString: string
+  isSuccessEditNilai: boolean
 }) {
+  const editID = localStorage.getItem('editID')
+
   const onSubmit = async () => {
     setLoading(row.idm, true)
     await handleSubmit(row?.idm)
     setLoading(row.idm, false)
   }
 
-  useEffect(() => {
-    if (keyString && editID && row) {
-      const currentFormValue = form.getValues(`nilai_${row?.idm}`)
-      if (row[keyString] !== currentFormValue) {
-        form.setValue(`nilai_${row?.idm}`, row[keyString] || '')
-      }
-    }
-  }, [keyString, editID, row, form])
+  // useEffect(() => {
+  //   if (keyString && editID && row) {
+  //     const currentFormValue = form.getValues(`nilai_${row?.idm}`)
+  //     if (row[keyString] !== currentFormValue) {
+  //       form.setValue(`nilai_${row?.idm}`, row[keyString] || '')
+  //     }
+  //   }
+  // }, [keyString, editID, row, form])
 
-  console.log(form.watch())
+  // useEffect(() => {
+  //   if (isSuccessEditNilai) {
+  //     // Tidak melakukan reset pada form saat sukses
+  //     const updatedValue = form.getValues(`nilai_${row?.id}`)
+  //     form.setValue(`nilai_${row?.idm}`, updatedValue || '')
+  //     // Anda juga dapat memperbarui nilai lain di sini jika diperlukan
+  //   }
+  // }, [isSuccessEditNilai, form, row?.idm])
 
   return (
     <div>
       <Form {...form}>
         <form className="flex gap-32" onSubmit={form.handleSubmit(onSubmit)}>
           <FormInputText
-            name={`nilai_${row?.idm}`}
+            name={`nilai_${row?.idm}_${editID}`}
             form={form}
             placeholder="Nilai"
             className="text-black-200"
             type="text"
             isDisabled={isLoading || isNotDraft}
             isFloat
-            isNumber
           />
           <button
             type="submit"

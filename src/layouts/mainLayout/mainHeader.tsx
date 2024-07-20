@@ -44,6 +44,8 @@ export function MainHeader({
                 {profil?.akademik?.nama_tahun} / {profil?.akademik?.tahap}
               </p>
               <p className="phones:hidden">|</p>
+              <p className="phones:hidden">{profil?.akademik?.nama_prodi}</p>
+              <p className="phones:hidden">|</p>
               <Link to={'edit-ta'}>
                 <span className="hover:cursor-pointer hover:text-white">
                   <IconDashboard size={12} />

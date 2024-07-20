@@ -206,35 +206,19 @@ export function useSiakadJadwalKuliah() {
 
   const handleSubmit = async (idm: string) => {
     const body = {
-      idm: idm,
-      id_mk: postData?.id_mk,
-      id_aspek: postData?.id_aspek,
-      nilai: form.watch(`nilai_${idm}`),
+      idm: idm ?? '',
+      id_mk: postData?.id_mk ?? '',
+      id_aspek: postData?.id_aspek ?? '',
+      nilai: form.watch(`nilai_${idm}_${editID}`) ?? '',
     }
 
     try {
+      localStorage.setItem('idm', idm)
       await createNilai({ body: body })
     } catch (error) {
       console.error(error)
     }
   }
-
-  useEffect(() => {
-    if (isSuccessEditNilai) {
-      toast.success(`Update nilai berhasil`, {
-        position: 'bottom-right',
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-        transition: Bounce,
-      })
-      form.reset()
-    }
-  }, [isSuccessEditNilai])
 
   useEffect(() => {
     if (isErrorEditNilai) {
@@ -331,5 +315,6 @@ export function useSiakadJadwalKuliah() {
     isShow,
     setIsShow,
     isNotDraft,
+    isSuccessEditNilai,
   }
 }

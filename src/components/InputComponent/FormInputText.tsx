@@ -45,7 +45,7 @@ export function FormInputText({
       name={name}
       render={({ field }) => (
         <FormItem
-          className={`flex w-full flex-col gap-12 text-[2rem] text-warna-dark ${className}`}
+          className={`text-warna-dark flex w-full flex-col gap-12 text-[2rem] ${className}`}
         >
           {label && <FormLabel className="font-roboto">{label}</FormLabel>}
           <Input
