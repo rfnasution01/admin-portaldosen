@@ -13,6 +13,7 @@ export type GetSiakadJadwalKuliahType = {
   hari: string
   jam_mulai: string
   ruangan: string
+  id_status: number
   jam_selesai: string
   status: string
   fakultas: string

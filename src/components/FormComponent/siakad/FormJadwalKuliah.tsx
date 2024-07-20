@@ -22,8 +22,10 @@ export default function FormJadwalKuliah({
   handleSubmit,
   row,
   setLoading,
+  isNotDraft,
 }: {
   form: UseFormReturn
+  isNotDraft: boolean
   isLoading: boolean
   handleSubmit: (idm: string) => Promise<void>
   row: rowType
@@ -45,13 +47,14 @@ export default function FormJadwalKuliah({
             placeholder="Nilai"
             className="text-black-200"
             type="text"
-            isDisabled={isLoading}
+            isDisabled={isLoading || isNotDraft}
             isFloat
             isNumber
           />
           <button
             type="submit"
-            className="flex items-center justify-center gap-12 rounded-2xl bg-success px-32 py-12 text-white disabled:cursor-not-allowed"
+            disabled={isNotDraft}
+            className="flex items-center justify-center gap-12 rounded-2xl bg-success px-16 py-12 text-white disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <div className="animate-spin duration-300">

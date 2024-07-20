@@ -1,11 +1,11 @@
 import { GetSiakadJadwalKuliahNilaiMahasiswaType } from '@/store/type/siakad/jadwalKuliahType'
 import { Loading } from '../Loading'
 import { Fragment, useState } from 'react'
-import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import FormJadwalKuliah, {
   rowType,
 } from '../FormComponent/siakad/FormJadwalKuliah'
 import LoadingGif from '@/assets/imgs/loading.gif'
+import { UseFormReturn } from 'react-hook-form'
 
 export function TableMahasiswaPerAspek({
   response,
@@ -13,16 +13,20 @@ export function TableMahasiswaPerAspek({
   currentPage,
   pageSize,
   nilaiMahasiswa,
+  handleSubmit,
+  form,
+  isNotDraft,
 }: {
   nilaiMahasiswa: GetSiakadJadwalKuliahNilaiMahasiswaType
   response: rowType[]
   loading: boolean
   currentPage: number
   pageSize: number
+  handleSubmit: (idm: string) => Promise<void>
+  form: UseFormReturn
+  isNotDraft: boolean
 }) {
   const editID = localStorage?.getItem('editID') ?? ''
-
-  const { handleSubmit, form } = useSiakadJadwalKuliah()
 
   const [loadingStates, setLoadingStates] = useState<{
     [key: string]: boolean
@@ -85,13 +89,13 @@ export function TableMahasiswaPerAspek({
                       'border-b border-black-300 text-neutral-black transition-all ease-in odd:bg-surface-disabled hover:cursor-pointer hover:bg-yellow-100'
                     }
                   >
-                    <td className="px-24 py-12 text-center align-top leading-medium">
+                    <td className="px-24 py-12 text-center align-middle leading-medium">
                       {currentPage * pageSize + (rowIndex + 1 - pageSize)}
                     </td>
-                    <td className="px-24 py-12 text-center align-top leading-medium ">
+                    <td className="px-24 py-12 text-center align-middle leading-medium ">
                       {row?.nim ?? '-'}
                     </td>
-                    <td className="px-24 py-12 text-center align-top leading-medium ">
+                    <td className="px-24 py-12 text-center align-middle leading-medium ">
                       {row?.nama ?? '-'} {row?.idm}
                     </td>
                     {nilaiMahasiswa.aspek_nilai
@@ -99,12 +103,12 @@ export function TableMahasiswaPerAspek({
                       ?.map((aspek, idx) => (
                         <td
                           key={idx}
-                          className="px-24 py-12 text-center align-top leading-medium"
+                          className="px-24 py-12 text-center align-middle leading-medium"
                         >
                           {row[aspek.nama] ?? '-'}
                         </td>
                       ))}
-                    <td className="px-24 py-12 text-center align-top leading-medium ">
+                    <td className="px-24 py-12 text-center align-middle leading-medium ">
                       {loadingStates[row.idm] ? (
                         <img src={LoadingGif} alt="Loading" />
                       ) : (
@@ -114,6 +118,7 @@ export function TableMahasiswaPerAspek({
                           handleSubmit={handleSubmit}
                           row={row}
                           setLoading={handleLoading}
+                          isNotDraft={isNotDraft}
                         />
                       )}
                     </td>

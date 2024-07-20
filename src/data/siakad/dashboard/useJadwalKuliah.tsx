@@ -13,6 +13,7 @@ import {
   useGetSiakadJadwalKuliahDetailQuery,
   useGetSiakadJadwalKuliahMahasiswaQuery,
   useGetSiakadNilaiMahasiswaQuery,
+  usePostAjukanNilaiMutation,
   useUpdateNilaiMutation,
 } from '@/store/slices/siakad/jadwalKuliahAPI'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,14 +25,14 @@ import { rowType } from '@/components/FormComponent/siakad'
 export function useSiakadJadwalKuliah() {
   const navigate = useNavigate()
 
+  const id = localStorage.getItem('jadwalID') ?? ''
   const editID = localStorage?.getItem('editID') ?? ''
+  const [isShow, setIsShow] = useState<boolean>(false)
 
   const [postData, setPostData] = useState<{
     id_mk: string
     id_aspek: string
   }>()
-
-  const id = localStorage.getItem('editId') ?? ''
 
   const [jadwalKuliahDetail, setJadwalKuliahDetail] =
     useState<GetSiakadJadwalKuliahType>()
@@ -255,6 +256,68 @@ export function useSiakadJadwalKuliah() {
     }
   }, [isErrorEditNilai, errorEditNilai])
 
+  // --- Ajukan Nilai ---
+  const [
+    createAjukan,
+    {
+      isError: isErrorAjukanNilai,
+      error: errorAjukanNilai,
+      isLoading: isLoadingAjukanNilai,
+      isSuccess: isSuccessAjukanNilai,
+    },
+  ] = usePostAjukanNilaiMutation()
+
+  const handleSubmitAjukan = async () => {
+    const body = {
+      id_jadwal: id,
+    }
+
+    try {
+      await createAjukan({ body: body })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    if (isSuccessAjukanNilai) {
+      toast.success(`Ajukan nilai berhasil`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      })
+      setTimeout(() => {
+        setIsShow(false)
+      }, 3000)
+    }
+  }, [isSuccessAjukanNilai])
+
+  useEffect(() => {
+    if (isErrorAjukanNilai) {
+      const errorMsg = errorAjukanNilai as { data?: { message?: string } }
+
+      toast.error(`${errorMsg?.data?.message ?? 'Terjadi Kesalahan'}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Bounce,
+      })
+    }
+  }, [isErrorAjukanNilai, errorAjukanNilai])
+
+  const isNotDraft = jadwalKuliahDetail?.id_status === 1
+
   return {
     loadingJadwalKuliah,
     jadwalKuliahDetail,
@@ -267,5 +330,10 @@ export function useSiakadJadwalKuliah() {
     handleSubmit,
     form,
     nilaiMahasiswaTransform,
+    handleSubmitAjukan,
+    isLoadingAjukanNilai,
+    isShow,
+    setIsShow,
+    isNotDraft,
   }
 }

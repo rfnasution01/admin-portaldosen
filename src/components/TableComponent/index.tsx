@@ -149,7 +149,7 @@ export function Table<T extends ItemTable, P>({
                             <Link
                               to={'/jadwal-perkuliahan/detail'}
                               onClick={() => {
-                                localStorage.setItem('editId', row?.id)
+                                localStorage.setItem('jadwalID', row?.id)
                               }}
                               className="rounded-lg bg-info px-12 py-4 text-neutral-white"
                             >
@@ -158,7 +158,7 @@ export function Table<T extends ItemTable, P>({
                             <Link
                               to={'/jadwal-perkuliahan/mahasiswa'}
                               onClick={() => {
-                                localStorage.setItem('editId', row?.id)
+                                localStorage.setItem('jadwalID', row?.id)
                               }}
                               className="rounded-lg bg-info px-12 py-4 text-neutral-white"
                             >

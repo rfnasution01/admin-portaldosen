@@ -80,6 +80,14 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
       }),
       invalidatesTags: ['siakad-nilai-mahasiswa'],
     }),
+    postAjukanNilai: builder.mutation<void, { body: { id_jadwal: string } }>({
+      query: ({ body }) => ({
+        url: `siakad/jadwal_kuliah_mhs_nilai_ajukan`,
+        method: 'POST',
+        body: body,
+      }),
+      invalidatesTags: ['siakad-nilai-mahasiswa'],
+    }),
   }),
 })
 
@@ -91,4 +99,5 @@ export const {
   useGetSiakadNilaiMahasiswaQuery,
   useGetBobotNilaiQuery,
   useUpdateNilaiMutation,
+  usePostAjukanNilaiMutation,
 } = SiakadProfilEndpoints
