@@ -33,6 +33,17 @@ export function AspekNilaiMahasiswaMenu({
           </button>
         </Link>
       ))}
+      <Link to={'/jadwal-perkuliahan/mahasiswa'}>
+        <button
+          className={clsx('rounded-3xl border px-24 py-16 ', {
+            'border-transparent bg-primary-900 text-neutral-white':
+              thirdPathname !== undefined,
+            'border-primary-900 text-primary-900': thirdPathname === undefined,
+          })}
+        >
+          <p className="text-nowrap">Rekap Nilai</p>
+        </button>
+      </Link>
     </div>
   )
 }

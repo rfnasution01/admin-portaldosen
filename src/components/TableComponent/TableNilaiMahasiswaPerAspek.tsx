@@ -32,9 +32,9 @@ export function TableMahasiswaPerAspek({
     [key: string]: boolean
   }>({})
 
-  // const key = nilaiMahasiswa?.aspek_nilai?.find(
-  //   (item) => item?.id === editID,
-  // )?.nama
+  const key = nilaiMahasiswa?.aspek_nilai?.find(
+    (item) => item?.id === editID,
+  )?.nama
 
   const handleLoading = (idm: string, isLoading: boolean) => {
     setLoadingStates((prev) => ({ ...prev, [idm]: isLoading }))
@@ -119,6 +119,8 @@ export function TableMahasiswaPerAspek({
                           row={row}
                           setLoading={handleLoading}
                           isNotDraft={isNotDraft}
+                          editID={editID}
+                          keyString={key}
                         />
                       )}
                     </td>

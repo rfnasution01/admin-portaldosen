@@ -3,6 +3,7 @@ import { Form } from '@/components/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FormInputText } from '@/components/InputComponent'
+import { useEffect } from 'react'
 
 export type rowType = {
   idm: string
@@ -23,6 +24,8 @@ export default function FormJadwalKuliah({
   row,
   setLoading,
   isNotDraft,
+  editID,
+  keyString,
 }: {
   form: UseFormReturn
   isNotDraft: boolean
@@ -30,12 +33,25 @@ export default function FormJadwalKuliah({
   handleSubmit: (idm: string) => Promise<void>
   row: rowType
   setLoading: (idm: string, isLoading: boolean) => void
+  editID: string
+  keyString: string
 }) {
   const onSubmit = async () => {
     setLoading(row.idm, true)
     await handleSubmit(row?.idm)
     setLoading(row.idm, false)
   }
+
+  useEffect(() => {
+    if (keyString && editID && row) {
+      const currentFormValue = form.getValues(`nilai_${row?.idm}`)
+      if (row[keyString] !== currentFormValue) {
+        form.setValue(`nilai_${row?.idm}`, row[keyString] || '')
+      }
+    }
+  }, [keyString, editID, row, form])
+
+  console.log(form.watch())
 
   return (
     <div>

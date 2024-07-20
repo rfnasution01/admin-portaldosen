@@ -180,7 +180,7 @@ export function useSiakadJadwalKuliah() {
         transformResponse(dataNilaiMahasiswa?.data, editID),
       )
     }
-  }, [dataNilaiMahasiswa, id])
+  }, [dataNilaiMahasiswa, id, editID])
 
   // --- Bobot Nilai ---
   const [bobot, setBobot] = useState<GetSiakadBobotNilaiTyoe[]>([])
@@ -223,7 +223,7 @@ export function useSiakadJadwalKuliah() {
     if (isSuccessEditNilai) {
       toast.success(`Update nilai berhasil`, {
         position: 'bottom-right',
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -232,9 +232,7 @@ export function useSiakadJadwalKuliah() {
         theme: 'light',
         transition: Bounce,
       })
-      setTimeout(() => {
-        form.reset()
-      }, 3000)
+      form.reset()
     }
   }, [isSuccessEditNilai])
 
@@ -292,9 +290,7 @@ export function useSiakadJadwalKuliah() {
         theme: 'light',
         transition: Bounce,
       })
-      setTimeout(() => {
-        setIsShow(false)
-      }, 3000)
+      setIsShow(false)
     }
   }, [isSuccessAjukanNilai])
 

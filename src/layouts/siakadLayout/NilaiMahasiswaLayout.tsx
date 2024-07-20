@@ -5,6 +5,7 @@ import {
   JadwalKuliahInfo,
   JadwalKuliahKeterangan,
 } from '@/features/siakad/jadwalKuliah'
+import { usePathname } from '@/utils/usePathname'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Outlet, useNavigate } from 'react-router-dom'
@@ -18,12 +19,17 @@ export default function NilaiMahasiswaLayout() {
     nilaiMahasiswa,
     loadingNilaiMahasiswa,
   } = useSiakadJadwalKuliah()
+  const { thirdPathname } = usePathname()
 
   return (
     <div className="scrollbar flex h-full w-full flex-col gap-32 overflow-y-auto p-32">
       <div
         onClick={() => {
-          navigate(-1)
+          if (thirdPathname === undefined) {
+            navigate(-1)
+          } else {
+            navigate('/jadwal-perkuliahan/mahasiswa')
+          }
         }}
         className="flex items-center gap-12 font-sans text-[2.2rem] text-black-300 hover:cursor-pointer hover:text-primary-active"
       >

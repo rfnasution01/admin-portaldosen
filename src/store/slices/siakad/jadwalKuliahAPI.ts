@@ -38,7 +38,7 @@ export const SiakadProfilEndpoints = api.injectEndpoints({
           id_jadwal: id_jadwal,
         },
       }),
-      providesTags: ['siakad-profil'],
+      providesTags: ['siakad-profil', 'siakad-nilai-mahasiswa'],
     }),
     getSiakadJadwalKuliahMahasiswa: builder.query<
       Res<GetSiakadJadwalKuliahMahasiswaType[]>,
