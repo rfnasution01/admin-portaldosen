@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-semi */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { UseFormReturn } from 'react-hook-form'
 import { FormField, FormItem, FormLabel, FormMessage } from '@/components/Form'
@@ -69,9 +70,26 @@ export function FormInputText({
               }
               if (isFloat && type === 'text') {
                 const inputValue = (e.target as HTMLInputElement).value
-                const formattedValue = inputValue
+                let formattedValue = inputValue
                   .replace(/[^\d.]/g, '') // Remove non-digit and non-period characters
                   .replace(/(\..*?)\..*/g, '$1') // Allow only one period
+
+                const numericValue = parseFloat(formattedValue)
+                if (numericValue > 100) {
+                  formattedValue = '100'
+                } else {
+                  // Limit to two decimal places
+                  const decimalIndex = formattedValue.indexOf('.')
+                  if (
+                    decimalIndex !== -1 &&
+                    formattedValue.length - decimalIndex > 3
+                  ) {
+                    formattedValue = formattedValue.substring(
+                      0,
+                      decimalIndex + 3,
+                    )
+                  }
+                }
 
                 ;(e.target as HTMLInputElement).value = formattedValue
                 field.onChange(formattedValue)

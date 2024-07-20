@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
-import { GetSiakadProfilType } from '@/store/type/siakad/profilType'
 import {
+  GetSiakadIdentitasType,
+  GetSiakadProfilType,
+} from '@/store/type/siakad/profilType'
+import {
+  useGetSiakadIdentitasQuery,
   useGetSiakadProfilQuery,
   useUpdateSiakadProfilMutation,
 } from '@/store/slices/siakad/profilAPI'
@@ -71,6 +75,21 @@ export function useSiakadProfil() {
       }
     }
   }, [isErrorProfil, errorProfil])
+
+  const [identitas, setIdentitas] = useState<GetSiakadIdentitasType>()
+  const {
+    data: dataIdentitas,
+    isLoading: isLoadingIdentitas,
+    isFetching: isFetchingIdentitas,
+  } = useGetSiakadIdentitasQuery()
+
+  const loadingIdentitas = isFetchingIdentitas || isLoadingIdentitas
+
+  useEffect(() => {
+    if (dataIdentitas) {
+      setIdentitas(dataIdentitas?.data)
+    }
+  }, [dataIdentitas])
 
   useEffect(() => {
     if (profil) {
@@ -247,5 +266,7 @@ export function useSiakadProfil() {
     formUpdateProfil,
     isLoadingEditProfil,
     handleSubmit,
+    identitas,
+    loadingIdentitas,
   }
 }

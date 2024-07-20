@@ -1,5 +1,4 @@
 import { ValidasiAjukan } from '@/components/DialogComponent/ValidasiAjukan'
-import { PrintHasil } from '@/components/PrintComponent'
 import { TableMahasiswa } from '@/components/TableComponent/TableNilaiMahasiswa'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import { faFile, faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -15,14 +14,7 @@ export default function NilaiMahasiswa() {
     handleSubmitAjukan,
     isLoadingAjukanNilai,
     isNotDraft,
-    jadwalKuliahDetail,
   } = useSiakadJadwalKuliah()
-
-  const handlePrintClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    event.stopPropagation()
-  }
 
   return (
     <>
@@ -33,15 +25,6 @@ export default function NilaiMahasiswa() {
         currentPage={1}
       />
       <div className="flex w-full justify-end gap-32">
-        <button
-          onClick={handlePrintClick}
-          className="flex items-center gap-12 rounded-2xl bg-primary-900 px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
-        >
-          <PrintHasil
-            response={nilaiMahasiswa}
-            mataKuliah={jadwalKuliahDetail?.nama_mk}
-          />
-        </button>
         <button
           disabled={isNotDraft}
           onClick={() => {

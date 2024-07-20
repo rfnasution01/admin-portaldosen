@@ -91,7 +91,7 @@ export function TableMahasiswaPerAspek({
                   <td className="px-24 py-12 text-center align-middle leading-medium ">
                     {row?.nim ?? '-'}
                   </td>
-                  <td className="px-24 py-12 text-center align-middle leading-medium ">
+                  <td className="px-24 py-12 text-left align-middle leading-medium ">
                     {row?.nama ?? '-'}
                   </td>
                   {nilaiMahasiswa.aspek_nilai

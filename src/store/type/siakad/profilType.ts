@@ -32,3 +32,16 @@ export type PostProfilBody = {
   nidn: string
   email: string
 }
+
+export type GetSiakadIdentitasType = {
+  kode_pt: string
+  nama_pt: string
+  singkatan: string
+  alamat: string
+  propinsi: string
+  kabupaten: string
+  kode_pos: string
+  fax: string
+  email: string
+  website: string
+}

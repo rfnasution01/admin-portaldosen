@@ -1,15 +1,18 @@
 import { Fragment, useRef } from 'react'
 import printJS from 'print-js'
-import { GetSiakadJadwalKuliahNilaiMahasiswaType } from '@/store/type/siakad/jadwalKuliahType'
+import {
+  GetSiakadJadwalKuliahNilaiMahasiswaType,
+  GetSiakadJadwalKuliahType,
+} from '@/store/type/siakad/jadwalKuliahType'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
 
 export function PrintHasil({
   response,
-  mataKuliah,
+  jadwalKuliahDetail,
 }: {
   response: GetSiakadJadwalKuliahNilaiMahasiswaType
-  mataKuliah: string
+  jadwalKuliahDetail: GetSiakadJadwalKuliahType
 }) {
   const printRef = useRef<HTMLDivElement>(null)
   // const totalPage = Math.ceil((profil?.length + 2) / 15)
@@ -30,10 +33,6 @@ export function PrintHasil({
                 margin: 0;
                 padding: 0;
               }
-              .header-space {
-                height: 136px;
-                padding-bottom: 32px;
-              }
               .footer-space {
                 height: 50px;
                 padding: 0 16px 0 16px;
@@ -42,66 +41,58 @@ export function PrintHasil({
                 justify-content: space-between;
               }
               .footer-space p {
-                font-style: italic
-              }
-              .content {
-                padding: 16px 16px 0 16px;
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
+                font-style: italic;
+                font-size: 10px;
               }
               .header {
-                display: flex;
-                flex-direction: row;
-                gap: 16px;
-                padding: 16px;
-                border-bottom: 1px solid black;
+                padding: 48px 16px 16px 16px;
               }
-              .header img { 
-                width: 120px;
-                height: 120px; 
+              .header p {
+                padding: 0;
+                margin: 0;
+                font-size: 24px;
+                text-transform: uppercase;
+                text-align: center;
               }
-              .header-text {
-                flex: 1;
+              .content {
                 display: flex;
                 flex-direction: column;
-                gap: 0;
-                justify-content: center;
-                align-items: center; 
-              }
-              .header-text p {
-                margin: 0;
-                padding: 0;
-              }
-              .content-header {
-                font-size: 18px;
-                text-align: center;
-                text-transform: uppercase;
-                font-weight: 700;
+                gap: 32px;
+                padding: 0 16px 0 16px;
               }
               .section-content {
                 display: flex;
                 flex-direction: column;
                 gap: 0;
+                padding: 16px;
+              }
+              .text-parent {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+              }
+              .text-section {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                flex: 1;
               }
               .section-content p {
-                margin: 0;
                 padding: 0;
+                margin: 0;
+                font-size: 10px;
               }
-              .title {
-                font-size: 22px;
-                font-weight: 700;
-                text-align: center;
-                text-transform: uppercase;
+              .text-width1 {
+                width: 30%;
               }
-              .description {
-                font-size: 20px;
-                text-align: center;
+              .text-width2 {
+                width: 70%;
               }
-              .title-header {
-                font-size: 20px;
-                text-align: center;
-                text-transform: uppercase;
+              .text-width3 {
+                width: 50%;
+              }
+              .text-width4 {
+                width: 50%;
               }
               table { 
                 width: 100%; 
@@ -112,51 +103,72 @@ export function PrintHasil({
                 padding: 0 4px 0 4px;
               } 
               .table-border p {
-                font-size: 12px;
-              } 
-              .bold {
-                font-weight: 700;
+                font-size: 10px;
               }
-              .mengetahui {
+              .width-stable {
+                width: 7%;
+                text-align: center;
+              }
+              .width-no {
+                width: 4%;
+                text-align: center;
+              }
+              .text-center {
+                text-align: center;
+              }
+              .flex-col {
                 display: flex;
-                flex-direction: row;
-                width: 100%;
-                align-items: end;
-              }
-              .kadis {
-                dispay: flex;
                 flex-direction: column;
                 gap: 0;
-                flex: 1;
-              }
-              kadis p {
                 padding: 0;
                 margin: 0;
               }
-              .kepsek {
-                dispay: flex;
-                flex-direction: column;
-                gap: 0;
-                flex: 1;
-              }
-              kepsek p {
+              .flex-col p {
                 padding: 0;
                 margin: 0;
               }
-                .diterbitkan {
+              .section-footer {
+                width: 100%;
+                border: 1px solid black;
+                font-size: 10px;
+              }
+              
+              .padding {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                width: 100%;
+                font-size: 10px;
+                padding: 4px 4px 32px 4px;
+              }
+
+              .padding p {
+                padding: 0;
+                margin: 0;
+              }
+
+              .pl {
+                display: flex;
+                flex-direction: column;
+                gap: 0;
+                padding: 0 12px 0 12px;
+                font-size: 10px;
+              }
+              .pl p {
+                padding: 0;
+                margin: 0;
+              }
+              .wfull {
                 display: flex;
                 flex-direction: row;
                 width: 100%;
+                gap: 32px;
               }
-              .diterbitkan p {
-                margin: 0;
-                padding: 0;  
+              .w25 {
+                width: 40%;
               }
-              .diterbitkan {
-                width: 50%;
-              }
-              .diterbitkan {
-                width: 50%;
+              .w35 {
+                width: 60%;
               }
             }
         `,
@@ -196,91 +208,162 @@ export function PrintHasil({
     <>
       <div ref={printRef} style={{ display: 'none' }}>
         <table>
-          {/* <thead>
+          <thead>
             <tr>
               <td>
-                <div className="header-space">
-                  <div className="header">
-                    <img src="/img/batubara.png" alt="PPDB" />
-                    <div className="header-text">
-                      <p className="title-header">
-                        Pemerintah Kabupaten Batu Bara
+                <div className="header">
+                  <p>Daftar Nilai Akhir</p>
+                </div>
+                <div className="section-content">
+                  <div className="text-parent">
+                    <div className="text-section">
+                      <p className="text-width1">Mata Kuliah</p>
+                      <p className="text-width2">
+                        : {jadwalKuliahDetail?.nama_mk}
                       </p>
-                      <p className="title">Dinas Pendidikan</p>
-                      <p className="title">{sekolah}</p>
-                      <p className="description">Alamat: {alamat}</p>
                     </div>
-                    <img src="/img/tutwuri.png" alt="PPDB" />
+                    <div className="text-section">
+                      <p className="text-width3">Tahun Ajaran/ Tahapan</p>
+                      <p className="text-width4">
+                        : {jadwalKuliahDetail?.tahun}/{' '}
+                        {jadwalKuliahDetail?.tahap}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-parent">
+                    <div className="text-section">
+                      <p className="text-width1">Fakultas</p>
+                      <p className="text-width2">
+                        : {jadwalKuliahDetail?.fakultas}
+                      </p>
+                    </div>
+                    <div className="text-section">
+                      <p className="text-width3">Kelas Perkuliahan</p>
+                      <p className="text-width4">
+                        : {jadwalKuliahDetail?.nama_kelas}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-parent">
+                    <div className="text-section">
+                      <p className="text-width1">Program Studi</p>
+                      <p className="text-width2">
+                        : {jadwalKuliahDetail?.prodi}
+                      </p>
+                    </div>
+                    <div className="text-section">
+                      <p className="text-width3">Ruangan</p>
+                      <p className="text-width4">
+                        : {jadwalKuliahDetail?.ruangan}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-parent">
+                    <div className="text-section">
+                      <p className="text-width1">Dosen</p>
+                      <p className="text-width2">
+                        : {jadwalKuliahDetail?.dosen}
+                      </p>
+                    </div>
+                    <div className="text-section">
+                      <p className="text-width3">Hari / Sesi</p>
+                      <p className="text-width4">
+                        : {jadwalKuliahDetail?.hari ?? '-'} /{' '}
+                        {jadwalKuliahDetail?.jam_mulai} -{' '}
+                        {jadwalKuliahDetail?.jam_selesai}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </td>
             </tr>
-          </thead> */}
+          </thead>
           <tbody>
             <tr>
               <td>
                 <div className="content">
-                  <div className="section-content">
-                    <p className="content-header">
-                      Rekap Hasil Nilai Mahasiswa
-                    </p>
-                    <p className="content-header">Mata Kuliah {mataKuliah}</p>
-                  </div>
                   <table>
                     <thead>
                       <tr>
-                        <th className="table-border">#</th>
-                        <th className="table-border">NIM</th>
-                        <th className="table-border">Mahasiswa</th>
+                        <th className="table-border width-no">#</th>
+                        <th className="table-border">
+                          <p>NIM</p>
+                        </th>
+                        <th className="table-border">
+                          <p>Mahasiswa</p>
+                        </th>
                         {response?.aspek_nilai?.map((item, idx) => (
-                          <th key={idx} className="table-border">
-                            <div className="flex flex-col">
-                              <p>{item?.nama} </p>
-                              <p>({item?.persen}%)</p>
+                          <th key={idx} className="table-border width-stable">
+                            <div className="flex-col">
+                              <p>{item?.nama}</p>
+                              <p> {item?.persen}%</p>
                             </div>
                           </th>
                         ))}
-                        <th className="table-border">NA</th>
-                        <th className="table-border">H</th>
-                        <th className="table-border">SKS</th>
-                        <th className="table-border">M</th>
+                        <th className="table-border width-stable">
+                          <p>NA</p>
+                        </th>
+                        <th className="table-border width-stable">
+                          <p>H</p>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {transformResponse(response)?.map((row, rowIndex) => (
                         <Fragment key={rowIndex}>
                           <tr key={rowIndex}>
-                            <td className="table-border">
+                            <td className="table-border text-center">
                               <p>{rowIndex + 1}</p>
                             </td>
-                            <td className="table-border">
+                            <td className="table-border text-center">
                               <p>{row?.nim}</p>
                             </td>
                             <td className="table-border">
                               <p>{row?.nama}</p>
                             </td>
                             {response.aspek_nilai.map((aspek, idx) => (
-                              <td key={idx} className="table-border">
-                                {row[aspek.nama] ?? '-'}
+                              <td
+                                key={idx}
+                                className="table-border text-center"
+                              >
+                                <p>{row[aspek.nama] ?? '-'}</p>
                               </td>
                             ))}
-                            <td className="table-border">
+                            <td className="table-border text-center">
                               <p>{row?.nilai_akhir}</p>
                             </td>
-                            <td className="table-border">
+                            <td className="table-border text-center">
                               <p>{row?.huruf}</p>
-                            </td>
-                            <td className="table-border">
-                              <p>{row?.sks}</p>
-                            </td>
-                            <td className="table-border">
-                              <p>{row?.mutu}</p>
                             </td>
                           </tr>
                         </Fragment>
                       ))}
                     </tbody>
                   </table>
+
+                  <div className="section-footer">
+                    <div className="padding">
+                      <p>Medan</p>
+                      <div className="wfull">
+                        <p className="w25">Dosen Penguji</p>
+                        <p className="w35">Tanda Tangans</p>
+                      </div>
+                      <div className="pl">
+                        {jadwalKuliahDetail?.dosen
+                          ?.filter((item) => item !== '')
+                          ?.map((item, idx) => (
+                            <div className="wfull" key={idx}>
+                              <p className="w25">
+                                {idx + 1}. {item}
+                              </p>
+                              <p className="w35">
+                                {idx + 1}.......................
+                              </p>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </td>
             </tr>
@@ -290,9 +373,6 @@ export function PrintHasil({
               <td>
                 <div className="footer-space">
                   <p>Di cetak dari https://dosen.sari-mutiara.ac.id/</p>
-                  {/* <p>
-                    Halaman {profil?.length} / {totalPage}
-                  </p> */}
                 </div>
               </td>
             </tr>
