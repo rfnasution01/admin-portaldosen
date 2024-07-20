@@ -6,13 +6,21 @@ import {
 } from '@/store/type/siakad/jadwalKuliahType'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPrint } from '@fortawesome/free-solid-svg-icons'
+import {
+  GetSiakadIdentitasType,
+  GetSiakadProfilType,
+} from '@/store/type/siakad/profilType'
 
 export function PrintHasil({
   response,
   jadwalKuliahDetail,
+  identitas,
+  profil,
 }: {
   response: GetSiakadJadwalKuliahNilaiMahasiswaType
   jadwalKuliahDetail: GetSiakadJadwalKuliahType
+  identitas: GetSiakadIdentitasType
+  profil: GetSiakadProfilType
 }) {
   const printRef = useRef<HTMLDivElement>(null)
   // const totalPage = Math.ceil((profil?.length + 2) / 15)
@@ -45,12 +53,12 @@ export function PrintHasil({
                 font-size: 10px;
               }
               .header {
-                padding: 48px 16px 16px 16px;
+                padding: 16px;
               }
               .header p {
                 padding: 0;
                 margin: 0;
-                font-size: 24px;
+                font-size: 16px;
                 text-transform: uppercase;
                 text-align: center;
               }
@@ -170,6 +178,44 @@ export function PrintHasil({
               .w35 {
                 width: 60%;
               }
+              .header-utama {
+                display: flex;
+                flex-direction: column;
+              }
+              .kop {
+                display: flex;
+                flex-direction: row;
+                gap: 30;
+                padding: 16px 16px 8px 16px;
+                border-bottom: 1px solid black;
+
+              }
+              .kop img {
+                width: 120px;
+                height: 120px;
+              }
+              .kop-title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 70%;
+              }
+              .kop-title p {
+                padding: 0; 
+                margin: 0;
+              }
+              .text-besar {
+                font-size: 20px;
+                text-transform: uppercase;
+                text-align: center;
+              }
+              .text-kecil {
+                font-size: 14px;
+              }
+              .text-bold {
+                font-weight: bold;
+              }
             }
         `,
       })
@@ -211,67 +257,90 @@ export function PrintHasil({
           <thead>
             <tr>
               <td>
-                <div className="header">
-                  <p>Daftar Nilai Akhir</p>
-                </div>
-                <div className="section-content">
-                  <div className="text-parent">
-                    <div className="text-section">
-                      <p className="text-width1">Mata Kuliah</p>
-                      <p className="text-width2">
-                        : {jadwalKuliahDetail?.nama_mk}
+                <div className="header-utama">
+                  <div className="kop">
+                    <img src="/logo.png" alt="Logo" />
+                    <div className="kop-title">
+                      <p className="text-besar">
+                        Kementrian Pendidikan Dan Kebudayaan
                       </p>
-                    </div>
-                    <div className="text-section">
-                      <p className="text-width3">Tahun Ajaran/ Tahapan</p>
-                      <p className="text-width4">
-                        : {jadwalKuliahDetail?.tahun}/{' '}
-                        {jadwalKuliahDetail?.tahap}
+                      <p className="text-besar text-bold">
+                        {identitas?.nama_pt}
                       </p>
-                    </div>
-                  </div>
-                  <div className="text-parent">
-                    <div className="text-section">
-                      <p className="text-width1">Fakultas</p>
-                      <p className="text-width2">
-                        : {jadwalKuliahDetail?.fakultas}
+                      <p className="text-besar text-bold">
+                        {profil?.akademik?.fakultas}
                       </p>
-                    </div>
-                    <div className="text-section">
-                      <p className="text-width3">Kelas Perkuliahan</p>
-                      <p className="text-width4">
-                        : {jadwalKuliahDetail?.nama_kelas}
+                      <p className="text-besar text-bold">
+                        {jadwalKuliahDetail?.prodi}
+                      </p>
+                      <p className="text-kecil">{identitas?.alamat}</p>
+                      <p className="text-kecil">
+                        Telp/Fax: {identitas?.fax}. Email: {identitas?.email}
                       </p>
                     </div>
                   </div>
-                  <div className="text-parent">
-                    <div className="text-section">
-                      <p className="text-width1">Program Studi</p>
-                      <p className="text-width2">
-                        : {jadwalKuliahDetail?.prodi}
-                      </p>
-                    </div>
-                    <div className="text-section">
-                      <p className="text-width3">Ruangan</p>
-                      <p className="text-width4">
-                        : {jadwalKuliahDetail?.ruangan}
-                      </p>
-                    </div>
+                  <div className="header">
+                    <p>Daftar Nilai Akhir</p>
                   </div>
-                  <div className="text-parent">
-                    <div className="text-section">
-                      <p className="text-width1">Dosen</p>
-                      <p className="text-width2">
-                        : {jadwalKuliahDetail?.dosen}
-                      </p>
+                  <div className="section-content">
+                    <div className="text-parent">
+                      <div className="text-section">
+                        <p className="text-width1">Mata Kuliah</p>
+                        <p className="text-width2">
+                          : {jadwalKuliahDetail?.nama_mk}
+                        </p>
+                      </div>
+                      <div className="text-section">
+                        <p className="text-width3">Tahun Ajaran/ Tahapan</p>
+                        <p className="text-width4">
+                          : {jadwalKuliahDetail?.tahun}/{' '}
+                          {jadwalKuliahDetail?.tahap}
+                        </p>
+                      </div>
                     </div>
-                    <div className="text-section">
-                      <p className="text-width3">Hari / Sesi</p>
-                      <p className="text-width4">
-                        : {jadwalKuliahDetail?.hari ?? '-'} /{' '}
-                        {jadwalKuliahDetail?.jam_mulai} -{' '}
-                        {jadwalKuliahDetail?.jam_selesai}
-                      </p>
+                    <div className="text-parent">
+                      <div className="text-section">
+                        <p className="text-width1">Fakultas</p>
+                        <p className="text-width2">
+                          : {jadwalKuliahDetail?.fakultas}
+                        </p>
+                      </div>
+                      <div className="text-section">
+                        <p className="text-width3">Kelas Perkuliahan</p>
+                        <p className="text-width4">
+                          : {jadwalKuliahDetail?.nama_kelas}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-parent">
+                      <div className="text-section">
+                        <p className="text-width1">Program Studi</p>
+                        <p className="text-width2">
+                          : {jadwalKuliahDetail?.prodi}
+                        </p>
+                      </div>
+                      <div className="text-section">
+                        <p className="text-width3">Ruangan</p>
+                        <p className="text-width4">
+                          : {jadwalKuliahDetail?.ruangan}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-parent">
+                      <div className="text-section">
+                        <p className="text-width1">Dosen</p>
+                        <p className="text-width2">
+                          : {profil?.identitas?.nama}
+                        </p>
+                      </div>
+                      <div className="text-section">
+                        <p className="text-width3">Hari / Sesi</p>
+                        <p className="text-width4">
+                          : {jadwalKuliahDetail?.hari ?? '-'} /{' '}
+                          {jadwalKuliahDetail?.jam_mulai} -{' '}
+                          {jadwalKuliahDetail?.jam_selesai}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,6 @@
 import { PrintHasil } from '@/components/PrintComponent'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
+import { useSiakadProfil } from '@/data/siakad/useProfil'
 import { SiakadAspekNilaiType } from '@/store/type/siakad/jadwalKuliahType'
 import { convertToSlug } from '@/utils/formatText'
 import { usePathname } from '@/utils/usePathname'
@@ -19,6 +20,7 @@ export function AspekNilaiMahasiswaMenu({
 
   const { thirdPathname } = usePathname()
   const { nilaiMahasiswa, jadwalKuliahDetail } = useSiakadJadwalKuliah()
+  const { identitas, profil } = useSiakadProfil()
 
   return (
     <div className="scrollbar flex w-full items-center justify-between gap-12 overflow-x-auto">
@@ -63,6 +65,8 @@ export function AspekNilaiMahasiswaMenu({
         <PrintHasil
           response={nilaiMahasiswa}
           jadwalKuliahDetail={jadwalKuliahDetail}
+          identitas={identitas}
+          profil={profil}
         />
       </button>
     </div>

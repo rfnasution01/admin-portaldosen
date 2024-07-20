@@ -22,6 +22,7 @@ export type SiakadAkademikType = {
   nama_tahun: string
   kode_prodi: string
   nama_prodi: string
+  fakultas: string
 }
 
 export type PostProfilBody = {
