@@ -12,6 +12,7 @@ import { Outlet, useNavigate } from 'react-router-dom'
 
 export default function NilaiMahasiswaLayout() {
   const navigate = useNavigate()
+  const { thirdPathname } = usePathname()
 
   const {
     jadwalKuliahDetail,
@@ -19,7 +20,6 @@ export default function NilaiMahasiswaLayout() {
     nilaiMahasiswa,
     loadingNilaiMahasiswa,
   } = useSiakadJadwalKuliah()
-  const { thirdPathname } = usePathname()
 
   return (
     <div className="scrollbar flex h-full w-full flex-col gap-32 overflow-y-auto p-32">
@@ -47,7 +47,8 @@ export default function NilaiMahasiswaLayout() {
         )}
       </div>
 
-      <JadwalKuliahKeterangan />
+      {thirdPathname === undefined && <JadwalKuliahKeterangan />}
+
       <div>
         {loadingNilaiMahasiswa ? (
           <SkeletonText lines={1} className="w-1/4 phones:w-1/2" />

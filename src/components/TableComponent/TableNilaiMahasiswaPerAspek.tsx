@@ -96,7 +96,7 @@ export function TableMahasiswaPerAspek({
                       {row?.nim ?? '-'}
                     </td>
                     <td className="px-24 py-12 text-center align-middle leading-medium ">
-                      {row?.nama ?? '-'} {row?.idm}
+                      {row?.nama ?? '-'}
                     </td>
                     {nilaiMahasiswa.aspek_nilai
                       ?.filter((item) => item?.id === editID)
