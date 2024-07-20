@@ -4,6 +4,7 @@ import { TableMahasiswa } from '@/components/TableComponent/TableNilaiMahasiswa'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import { faFile, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import clsx from 'clsx'
 
 export default function NilaiMahasiswa() {
   const {
@@ -46,7 +47,13 @@ export default function NilaiMahasiswa() {
           onClick={() => {
             setIsShow(true)
           }}
-          className="flex items-center gap-12 rounded-2xl bg-danger  px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
+          className={clsx(
+            'flex items-center gap-12 rounded-2xl px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed',
+            {
+              'bg-danger': !isNotDraft,
+              'bg-success': isNotDraft,
+            },
+          )}
         >
           <FontAwesomeIcon icon={faFile} />
           <p>
