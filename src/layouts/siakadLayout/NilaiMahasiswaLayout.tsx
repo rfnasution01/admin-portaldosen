@@ -27,7 +27,7 @@ export default function NilaiMahasiswaLayout() {
 
   useEffect(() => {
     setIsLoading(true)
-    const timer = setTimeout(() => setIsLoading(false), 1000)
+    const timer = setTimeout(() => setIsLoading(false), 100)
     return () => clearTimeout(timer)
   }, [thirdPathname])
 

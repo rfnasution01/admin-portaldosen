@@ -106,6 +106,7 @@ export default {
           yellow: '#FAFABE',
           secondary: '#F0F7FF',
           black: '#1C1C1C',
+          cell: '#ff6600',
         },
         primary: {
           active: '#3085C3',

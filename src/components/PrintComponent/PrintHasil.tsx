@@ -108,10 +108,11 @@ export function PrintHasil({
               }
               .table-border {
                 border: 1px solid black;
-                padding: 0 4px 0 4px;
               } 
               .table-border p {
                 font-size: 10px;
+                padding: 2px;
+                margin: 0;
               }
               .width-stable {
                 width: 7%;
@@ -415,7 +416,7 @@ export function PrintHasil({
                       <p>Medan</p>
                       <div className="wfull">
                         <p className="w25">Dosen Penguji</p>
-                        <p className="w35">Tanda Tangans</p>
+                        <p className="w35">Tanda Tangan</p>
                       </div>
                       <div className="pl">
                         {jadwalKuliahDetail?.dosen

@@ -5,6 +5,7 @@ import FormJadwalKuliah, {
 } from '../FormComponent/siakad/FormJadwalKuliah'
 import LoadingGif from '@/assets/imgs/loading.gif'
 import { UseFormReturn } from 'react-hook-form'
+import clsx from 'clsx'
 
 export function TableMahasiswaPerAspek({
   response,
@@ -37,6 +38,16 @@ export function TableMahasiswaPerAspek({
 
   const handleLoading = (idm: string, isLoading: boolean) => {
     setLoadingStates((prev) => ({ ...prev, [idm]: isLoading }))
+  }
+
+  const isValueEmpty = (value: string) => {
+    return (
+      value === null ||
+      value === undefined ||
+      value === '0.00' ||
+      value === '0' ||
+      value === ''
+    )
   }
 
   return (
@@ -81,9 +92,12 @@ export function TableMahasiswaPerAspek({
             {response?.map((row, rowIndex) => (
               <Fragment key={rowIndex}>
                 <tr
-                  className={
-                    'border-b border-black-300 text-neutral-black transition-all ease-in odd:bg-surface-disabled hover:cursor-pointer hover:bg-yellow-100'
-                  }
+                  className={clsx(
+                    'border-b border-black-300 text-neutral-black transition-all ease-in hover:cursor-pointer hover:bg-yellow-100',
+                    {
+                      'bg-neutral-cell': isValueEmpty(row?.[key]),
+                    },
+                  )}
                 >
                   <td className="px-24 py-12 text-center align-middle leading-medium">
                     {currentPage * pageSize + (rowIndex + 1 - pageSize)}

@@ -1,6 +1,7 @@
 import { GetSiakadJadwalKuliahNilaiMahasiswaType } from '@/store/type/siakad/jadwalKuliahType'
 import { Loading } from '../Loading'
 import { Fragment } from 'react'
+import clsx from 'clsx'
 
 export function TableMahasiswa({
   response,
@@ -41,6 +42,16 @@ export function TableMahasiswa({
         ...transformedAspekNilai,
       }
     })
+  }
+
+  const isValueEmpty = (value: string) => {
+    return (
+      value === null ||
+      value === undefined ||
+      value === '0.00' ||
+      value === '0' ||
+      value === ''
+    )
   }
 
   return (
@@ -115,9 +126,14 @@ export function TableMahasiswa({
                     {response.aspek_nilai.map((aspek, idx) => (
                       <td
                         key={idx}
-                        className="px-24 py-12 text-center align-top leading-medium"
+                        className={clsx(
+                          'px-24 py-12 text-center align-top leading-medium',
+                          {
+                            'bg-neutral-cell': isValueEmpty(row[aspek?.nama]),
+                          },
+                        )}
                       >
-                        {row[aspek.nama] ?? '-'}
+                        {row[aspek?.nama] ?? '-'}
                       </td>
                     ))}
                     <td className="px-24 py-12 text-center align-top leading-medium ">
