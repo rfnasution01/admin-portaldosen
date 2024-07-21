@@ -3,7 +3,7 @@ import { Form } from '@/components/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FormInputText } from '@/components/InputComponent'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export type rowType = {
   idm: string
@@ -43,14 +43,67 @@ export default function FormJadwalKuliah({
     setLoading(row.idm, false)
   }
 
+  // useEffect(() => {
+  //   if (keyString && editID && row) {
+  //     const currentFormValue = form.getValues(`nilai_${row?.idm}`)
+  //     if (row[keyString] !== currentFormValue) {
+  //       form.setValue(`nilai_${row?.idm}_${editID}`, row[keyString] || '')
+  //     }
+  //   }
+  // }, [keyString, editID, row, form])
+
+  const [prevEditID, setPrevEditID] = useState(editID)
+
+  // console.log(formWatch)
+
+  // useEffect(() => {
+  //   if (keyString && editID && row) {
+  //     const currentFormValue = form.getValues(`nilai_${row?.idm}_${editID}`)
+  //     const newValue = row[keyString]
+
+  //     // Only set value if newValue is valid and different from the current form value
+  //     if (
+  //       newValue !== null &&
+  //       newValue !== undefined &&
+  //       newValue !== '' &&
+  //       currentFormValue !== newValue
+  //     ) {
+  //       form.setValue(`nilai_${row?.idm}_${editID}`, newValue)
+  //     } else if (
+  //       newValue === null ||
+  //       newValue === undefined ||
+  //       newValue === ''
+  //     ) {
+  //       form.setValue(`nilai_${row?.idm}_${editID}`, '')
+  //     }
+  //   }
+  // }, [keyString, editID, row, form])
+
   useEffect(() => {
-    if (keyString && editID && row) {
-      const currentFormValue = form.getValues(`nilai_${row?.idm}`)
-      if (row[keyString] !== currentFormValue) {
-        form.setValue(`nilai_${row?.idm}_${editID}`, row[keyString] || '')
+    if (editID !== prevEditID) {
+      // Reset form values when editID changes
+      form.reset()
+      setPrevEditID(editID)
+    } else if (keyString && editID && row) {
+      const fieldName = `nilai_${row?.idm}_${editID}`
+      const currentFormValue = form.getValues(fieldName)
+      const newValue = row[keyString]
+
+      if (
+        newValue !== null &&
+        newValue !== undefined &&
+        newValue !== '' &&
+        currentFormValue !== newValue
+      ) {
+        form.setValue(fieldName, newValue)
+      } else if (
+        (newValue === null || newValue === undefined || newValue === '') &&
+        (currentFormValue === undefined || currentFormValue === '')
+      ) {
+        form.setValue(fieldName, '')
       }
     }
-  }, [keyString, editID, row, form])
+  }, [keyString, editID, row, form, prevEditID])
 
   return (
     <div>

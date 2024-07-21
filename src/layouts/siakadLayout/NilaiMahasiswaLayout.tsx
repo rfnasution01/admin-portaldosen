@@ -1,3 +1,4 @@
+import { Loading } from '@/components/Loading'
 import SkeletonText from '@/components/SkeletonComonent/SkeletonText'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import {
@@ -8,6 +9,7 @@ import {
 import { usePathname } from '@/utils/usePathname'
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 export default function NilaiMahasiswaLayout() {
@@ -20,6 +22,14 @@ export default function NilaiMahasiswaLayout() {
     nilaiMahasiswa,
     loadingNilaiMahasiswa,
   } = useSiakadJadwalKuliah()
+
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    setIsLoading(true)
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [thirdPathname])
 
   return (
     <div className="scrollbar flex h-full w-full flex-col gap-32 overflow-y-auto p-32">
@@ -57,7 +67,7 @@ export default function NilaiMahasiswaLayout() {
         )}
       </div>
 
-      <Outlet />
+      {isLoading ? <Loading /> : <Outlet />}
     </div>
   )
 }
