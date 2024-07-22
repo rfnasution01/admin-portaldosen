@@ -11,7 +11,7 @@ import {
   GetSiakadProfilType,
 } from '@/store/type/siakad/profilType'
 
-export function PrintHasil({
+export function PrintKehadiran({
   response,
   jadwalKuliahDetail,
   identitas,
@@ -116,6 +116,10 @@ export function PrintHasil({
               }
               .width-stable {
                 width: 7%;
+                text-align: center;
+              }
+              .width-ttd {
+                width: 10%;
                 text-align: center;
               }
               .width-no {
@@ -281,7 +285,7 @@ export function PrintHasil({
                     </div>
                   </div>
                   <div className="header">
-                    <p>Daftar Nilai Akhir</p>
+                    <p>Daftar Hadir</p>
                   </div>
                   <div className="section-content">
                     <div className="text-parent">
@@ -370,11 +374,8 @@ export function PrintHasil({
                             </div>
                           </th>
                         ))}
-                        <th className="table-border width-stable">
-                          <p>NA</p>
-                        </th>
-                        <th className="table-border width-stable">
-                          <p>H</p>
+                        <th className="table-border width-ttd">
+                          <p>Tanda Tangan</p>
                         </th>
                       </tr>
                     </thead>
@@ -391,19 +392,16 @@ export function PrintHasil({
                             <td className="table-border">
                               <p>{row?.nama}</p>
                             </td>
-                            {response.aspek_nilai.map((aspek, idx) => (
+                            {response.aspek_nilai.map((_aspek, idx) => (
                               <td
                                 key={idx}
                                 className="table-border text-center"
                               >
-                                <p>{row[aspek.nama] ?? '-'}</p>
+                                <p></p>
                               </td>
                             ))}
                             <td className="table-border text-center">
-                              <p>{row?.nilai_akhir}</p>
-                            </td>
-                            <td className="table-border text-center">
-                              <p>{row?.huruf}</p>
+                              <p>.....................</p>
                             </td>
                           </tr>
                         </Fragment>
@@ -459,7 +457,7 @@ export function PrintHasil({
         className="flex items-center gap-12"
       >
         <FontAwesomeIcon icon={faPrint} />
-        <p>Cetak Hasil</p>
+        <p>Cetak Kehadiran</p>
       </button>
     </>
   )

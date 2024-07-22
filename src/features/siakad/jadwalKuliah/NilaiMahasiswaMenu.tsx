@@ -1,4 +1,5 @@
 import { PrintHasil } from '@/components/PrintComponent'
+import { PrintKehadiran } from '@/components/PrintComponent/PrintKehadiran'
 import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
 import { useSiakadProfil } from '@/data/siakad/useProfil'
 import { SiakadAspekNilaiType } from '@/store/type/siakad/jadwalKuliahType'
@@ -58,17 +59,30 @@ export function AspekNilaiMahasiswaMenu({
           </button>
         </Link>
       </div>
-      <button
-        onClick={handlePrintClick}
-        className="flex items-center gap-12 rounded-2xl bg-primary-900 px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
-      >
-        <PrintHasil
-          response={nilaiMahasiswa}
-          jadwalKuliahDetail={jadwalKuliahDetail}
-          identitas={identitas}
-          profil={profil}
-        />
-      </button>
+      <div className="flex items-center gap-12">
+        <button
+          onClick={handlePrintClick}
+          className="flex items-center gap-12 rounded-2xl bg-primary-900 px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
+        >
+          <PrintHasil
+            response={nilaiMahasiswa}
+            jadwalKuliahDetail={jadwalKuliahDetail}
+            identitas={identitas}
+            profil={profil}
+          />
+        </button>
+        <button
+          onClick={handlePrintClick}
+          className="flex items-center gap-12 rounded-2xl bg-primary-900 px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
+        >
+          <PrintKehadiran
+            response={nilaiMahasiswa}
+            jadwalKuliahDetail={jadwalKuliahDetail}
+            identitas={identitas}
+            profil={profil}
+          />
+        </button>
+      </div>
     </div>
   )
 }
