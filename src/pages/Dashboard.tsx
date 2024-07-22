@@ -12,7 +12,13 @@ export default function Dashboard() {
   return (
     <div className="scrollbar flex h-full  w-full flex-col gap-32 overflow-y-auto p-32">
       <p className="font-sans text-[2.8rem] font-bold text-black-300">
-        Selamat Datang, Pak {profil?.identitas?.nama}
+        Selamat Datang,{' '}
+        {profil?.identitas?.jenis_kelamin === '1'
+          ? 'Pak'
+          : profil?.identitas?.jenis_kelamin === '0'
+            ? 'Bu'
+            : ''}{' '}
+        {profil?.identitas?.nama}
       </p>
       <div className="flex flex-col rounded-2xl border bg-neutral-secondary p-32 font-mono text-[2.2rem] text-neutral-black">
         {loadingKataBijak ? (

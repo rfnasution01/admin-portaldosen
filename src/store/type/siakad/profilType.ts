@@ -13,6 +13,7 @@ export type SiakadProfilType = {
   gambar: string
   gelar_depan: string
   gelar_belakang: string
+  jenis_kelamin: string
 }
 
 export type SiakadAkademikType = {
