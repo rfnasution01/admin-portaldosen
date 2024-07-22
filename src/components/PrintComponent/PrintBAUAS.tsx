@@ -126,10 +126,10 @@ export function PrintBAUAS({
                 padding-left: 4px;
               } 
               .width-label {
-                width: 30%;
+                width: 40%;
               }
               .width-value {
-                width: 70%;
+                width: 60%;
               }
               .table-border p {
                 font-size: 10px;
@@ -318,7 +318,9 @@ export function PrintBAUAS({
                         <th className="table-border width-label">
                           Ruangan Ujian
                         </th>
-                        <td className="table-border width-value">:</td>
+                        <td className="table-border width-value">
+                          : {jadwalKuliahDetail?.ruangan}
+                        </td>
                       </tr>
                       <tr>
                         <th className="table-border width-label">
@@ -330,25 +332,19 @@ export function PrintBAUAS({
                         <th className="table-border width-label">
                           Jumlah Peserta Yang Tidak Hadir
                         </th>
-                        <td className="table-border width-value">
-                          : {jadwalKuliahDetail?.kode_mk}
-                        </td>
+                        <td className="table-border width-value">:</td>
                       </tr>
                       <tr>
                         <th className="table-border width-label">
                           Keadaan Ujian
                         </th>
-                        <td className="table-border width-value">
-                          : {jadwalKuliahDetail?.kode_mk}
-                        </td>
+                        <td className="table-border width-value">:</td>
                       </tr>
                       <tr>
                         <th className="table-border width-label">
                           Peserta Yang Curang
                         </th>
-                        <td className="table-border width-value">
-                          : {jadwalKuliahDetail?.kode_mk}
-                        </td>
+                        <td className="table-border width-value">:</td>
                       </tr>
                     </tbody>
                   </table>

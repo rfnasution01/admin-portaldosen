@@ -35,11 +35,7 @@ export default function NilaiMahasiswaLayout() {
     <div className="scrollbar flex h-full w-full flex-col gap-32 overflow-y-auto p-32">
       <div
         onClick={() => {
-          if (thirdPathname === undefined) {
-            navigate(-1)
-          } else {
-            navigate('/jadwal-perkuliahan/mahasiswa')
-          }
+          navigate('/jadwal-perkuliahan')
         }}
         className="flex items-center gap-12 font-sans text-[2.2rem] text-black-300 hover:cursor-pointer hover:text-primary-active"
       >
