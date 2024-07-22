@@ -4,8 +4,6 @@ import {
   GetSiakadJadwalKuliahNilaiMahasiswaType,
   GetSiakadJadwalKuliahType,
 } from '@/store/type/siakad/jadwalKuliahType'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPrint } from '@fortawesome/free-solid-svg-icons'
 import {
   GetSiakadIdentitasType,
   GetSiakadProfilType,
@@ -140,13 +138,15 @@ export function PrintHasil({
                 width: 100%;
                 border: 1px solid black;
                 font-size: 10px;
+                display: flex;
+                flex-direction: row;
               }
               
               .padding {
                 display: flex;
                 flex-direction: column;
                 gap: 0;
-                width: 100%;
+                width: 50%;
                 font-size: 10px;
                 padding: 4px 4px 32px 4px;
               }
@@ -216,6 +216,21 @@ export function PrintHasil({
               }
               .text-bold {
                 font-weight: bold;
+              }
+              .kaprodi {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                width: 50%;
+                font-size: 10px;
+                padding: 4px 4px 32px 4px;
+                border-left: 1px solid black;
+              }
+              .kaprodi {
+                padding: 0;
+                margin: 0;
               }
             }
         `,
@@ -433,6 +448,10 @@ export function PrintHasil({
                           ))}
                       </div>
                     </div>
+                    <div className="kaprodi">
+                      <p>Ketua Program Studi</p>
+                      <p>{profil?.akademik?.ketua_prodi}</p>
+                    </div>
                   </div>
                 </div>
               </td>
@@ -456,9 +475,8 @@ export function PrintHasil({
           handlePrint()
         }}
         type="button"
-        className="flex items-center gap-12"
+        className="flex items-center gap-12 text-primary-inactive hover:text-primary-active"
       >
-        <FontAwesomeIcon icon={faPrint} />
         <p>Cetak Hasil</p>
       </button>
     </>

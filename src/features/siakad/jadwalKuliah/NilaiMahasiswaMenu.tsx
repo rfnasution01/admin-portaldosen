@@ -1,7 +1,4 @@
-import { PrintHasil } from '@/components/PrintComponent'
-import { PrintKehadiran } from '@/components/PrintComponent/PrintKehadiran'
-import { useSiakadJadwalKuliah } from '@/data/siakad/dashboard'
-import { useSiakadProfil } from '@/data/siakad/useProfil'
+import { MenubarPrint } from '@/components/Menubar/MenubarPrint'
 import { SiakadAspekNilaiType } from '@/store/type/siakad/jadwalKuliahType'
 import { convertToSlug } from '@/utils/formatText'
 import { usePathname } from '@/utils/usePathname'
@@ -13,15 +10,7 @@ export function AspekNilaiMahasiswaMenu({
 }: {
   aspekNilai: SiakadAspekNilaiType[]
 }) {
-  const handlePrintClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
-    event.stopPropagation()
-  }
-
   const { thirdPathname } = usePathname()
-  const { nilaiMahasiswa, jadwalKuliahDetail } = useSiakadJadwalKuliah()
-  const { identitas, profil } = useSiakadProfil()
 
   return (
     <div className="scrollbar flex w-full items-center justify-between gap-12 overflow-x-auto">
@@ -60,28 +49,7 @@ export function AspekNilaiMahasiswaMenu({
         </Link>
       </div>
       <div className="flex items-center gap-12">
-        <button
-          onClick={handlePrintClick}
-          className="flex items-center gap-12 rounded-2xl bg-primary-900 px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
-        >
-          <PrintHasil
-            response={nilaiMahasiswa}
-            jadwalKuliahDetail={jadwalKuliahDetail}
-            identitas={identitas}
-            profil={profil}
-          />
-        </button>
-        <button
-          onClick={handlePrintClick}
-          className="flex items-center gap-12 rounded-2xl bg-primary-900 px-24 py-12 text-white hover:bg-opacity-80 disabled:cursor-not-allowed"
-        >
-          <PrintKehadiran
-            response={nilaiMahasiswa}
-            jadwalKuliahDetail={jadwalKuliahDetail}
-            identitas={identitas}
-            profil={profil}
-          />
-        </button>
+        <MenubarPrint />
       </div>
     </div>
   )
