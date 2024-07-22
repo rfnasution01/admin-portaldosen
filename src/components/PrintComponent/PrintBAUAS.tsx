@@ -44,7 +44,7 @@ export function PrintBAUAS({
               }
               .footer-space {
                 height: 50px;
-                padding: 0 16px 0 16px;
+                padding: 0 64px 0 64px;
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
@@ -69,7 +69,7 @@ export function PrintBAUAS({
                 display: flex;
                 flex-direction: column;
                 gap: 12px;
-                padding: 0 16px 0 16px;
+                padding: 0 64px 0 64px;
               }
 
               .content p {
@@ -86,7 +86,7 @@ export function PrintBAUAS({
                 display: flex;
                 flex-direction: row;
                 gap: 30;
-                padding: 16px 16px 8px 16px;
+                padding: 64px 64px 8px 64px;
                 border-bottom: 1px solid black;
 
               }
@@ -99,7 +99,7 @@ export function PrintBAUAS({
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                width: 70%;
+                width: 100%;
               }
               .kop-title p {
                 padding: 0; 
@@ -195,7 +195,7 @@ export function PrintBAUAS({
                 display: flex;
                 flex-direction: column;
                 flex: 1;
-                padding: 4px;
+                padding: 8px;
               }  
               .penjelasan-lanjutan {
                 display: flex;
@@ -395,7 +395,7 @@ export function PrintBAUAS({
                         <div className="penjelasan-lanjutan" key={idx}>
                           <p className="w-13">{item?.nama}</p>
                           <p className="w-23">
-                            Nilai{' '}
+                            = Nilai{' '}
                             {item?.nama === 'UAS'
                               ? 'Ujian Akhir Semester'
                               : item?.nama === 'UTS'

@@ -140,6 +140,7 @@ export function PrintHasil({
                 font-size: 10px;
                 display: flex;
                 flex-direction: row;
+                page-break-inside: avoid;
               }
               
               .padding {
