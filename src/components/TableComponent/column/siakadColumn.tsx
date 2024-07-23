@@ -37,7 +37,7 @@ export const columnsListJadwalKuliahMahasiswa: Column<GetSiakadJadwalKuliahMahas
       renderCell: (rowData) => {
         return (
           <div>
-            {rowData?.foto || rowData?.foto !== '' ? (
+            {rowData?.foto ? (
               <img
                 src={rowData?.foto}
                 alt={rowData?.nama}
